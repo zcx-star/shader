@@ -1,0 +1,152 @@
+/*===== global =====*/
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+/*    font-family: Verdana, Arial, '宋体';*/
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    color: #417690;
+    background: #fff;
+    border: none;
+}
+#container{
+    position: relative;
+    width: 100%;
+    padding: 0;
+}
+
+/*===== header =====*/
+#header{
+    width: auto;
+    height: 40px;
+    padding: 10px 40px;
+    background: #5ab1dc;
+    line-height: 40px;
+    color: #ffffff;
+}
+#branding{
+    float: left;    
+}
+#branding h1{
+    margin: 0;
+}
+#user_tools{
+    float: right;
+    text-align: right;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/*===== content =====*/
+#content{
+    padding: 30px;
+}
+#side{
+    float: left;
+}
+#main{
+    padding: 0 30px;
+    margin: 0 0 0 250px;
+    background-color: #f8f8f8;
+}
+.row{
+    margin: 0 0 10px 0;
+}
+.panel{
+    letter-spacing: 0.5px;
+    font-family: 'Arial','宋体';
+    background: #f8f8f8;
+    margin:0 0 10px 0;
+    padding: 20px;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+#submit_bugpic{
+    margin: 6px 0 0 44px;
+    width:128px; 
+    background: #5ab1dc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+.board{
+    float:left;
+    margin: 10px 20px 20px 0;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+li{
+    margin: 0 0 9px 0;
+}
+
+.side_label{
+    width:40px;
+    padding:0 6px 0 0;    
+    vertical-align: middle;
+}
+ 
+input[type=text]{
+    border: 1px solid #d8d8d8;  
+    width:150px; 
+    height: 28px;  
+    line-height: 14px;  
+    border-radius: 5px;
+    padding:8px 10px;  
+    vertical-align: middle;  
+    color:#666;
+}
+
+.submit_problem{
+    width:32px; 
+    background: #5ab1dc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+input[type=file]{
+    width: 150px;
+}
+#profile{
+    float: left;
+    width: 180px;
+    height: 120px;
+    margin: 0 0 10px 0;
+}
+.vote{
+    margin: 0 0 0 180px;
+    padding: 0 4px;
+}
+
+.count{
+    text-align:center; 
+    display: block;
+    margin:0 0 10px 0;
+    font-size: 14px;
+}
+#show_problem{
+    color: #ffa200;  
+}
+#show_useful{
+    color: #c5dc32;
+}
+a{
+    color: #ffffff;
+}
+#submit_problem{
+    width:32px; 
+    background: #5ab1dc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    background-image: url(/static/errorshooting/images/a.png);
+}

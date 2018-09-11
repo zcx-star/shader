@@ -1,0 +1,67 @@
+<head>
+	{%extends "shader/base.html"%}
+	{% block title %}Roboto Shader{% endblock %}
+    {% block extrastyle %}<link rel="stylesheet" type="text/css" href="/static/shader/index.css"/>
+    <script src="/static/shader/select.js"></script>    
+    {% endblock %}
+</head>
+
+<body>
+	{% block branding %}Roboto Shader{% endblock %}
+
+    <!-- list all shaders here, sort by name -->
+	{% block sidebar %}	
+        {% if shader_list %}
+        <ul>
+            {% for shader in shader_list %}
+                <li><a href="{% url 'detail' shader.shader_name %}">{{ shader.shader_name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No shader are available.</p>
+        {% endif %}
+	{% endblock %}
+
+    <!-- a table to choose specified shader -->
+	{% block main %}
+    <table>
+        <tr>
+            <th>
+                <ul id="select">
+            <li>
+                <div class="select-head">
+                    <span class="select-head-cont"></span>
+                    <span class="select-icon">▼</span>
+                </div>
+                <ul class="option">
+                    <li class="option-item">chrome</li>
+                    <li class="option-item">safari</li>
+                    <li class="option-item">Edge</li>
+                    <li class="option-item">firefox</li>
+                    <li class="option-item">ie8</li>
+                </ul>
+                
+            </li>
+        </ul>
+
+            </th>
+            <th>Info</th>
+            <th>URL</th>
+            <th>P4</th>
+        <tr>
+
+        {% if shader_list %}
+            {% for shader in shader_list %}
+            <tr>
+                <td>{{ shader.shader_name }}</td>
+                <td>{{ shader.shader_info }}</td>
+                <td>{{ shader.shader_url }}</td>
+                <td>{{ shader.shader_p4 }}</td>
+            </tr>               
+            {% endfor %}
+        {% else %}
+        {% endif %}
+
+    </table>	    
+	{% endblock %}
+</body>

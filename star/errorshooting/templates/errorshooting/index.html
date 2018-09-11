@@ -1,0 +1,59 @@
+<head>
+	{%extends "errorshooting/base.html"%}
+	{% block title %}Errorshooting{% endblock %}
+</head>
+
+<body>
+	{% block branding %}Errorshooting{% endblock %}
+	{% block user_tools %}home / shaer / errorshooting{% endblock %}
+
+	{% block content %}
+		<div id="side">
+			<div class="panel" id="panel_submit">				
+				<form method="POST" enctype="multipart/form-data" name="form_error">{% csrf_token %}				
+				<div class="row"> <label class="side_label">用户</label> {{submitted.user}}</div>
+				<div class="row"> <label class="side_label">图片</label> {{submitted.img}}</div>
+				<div class="row"> <input type="submit" value="上传" id="submit_bugpic" name="submit_bugpic"> </div>	        
+		        </form>
+			</div>
+
+			<div class="panel" id="panel_category">
+				<ul>
+					<li>> FrostEd | xxx</li>
+					<li>> MAYA | xxx</li>
+					<li>> P4 | xxx</li>
+					<li>> Other | xxx</li>
+				</ul>
+			</div>			
+		</div><!-- side -->
+
+		<div id="main">
+			{% if pic_list %}
+				{% for pic in pic_list %}
+				<div  class="board">
+					<img id="profile" src={{pic.img.url}}>
+					<div class="vote">
+						<form method="POST" name="form_problem">{% csrf_token %}
+						<input type="hidden" name="id" value={{pic.id}}>
+						<input type="submit" name="submit_problem" id="submit_problem" class="icon">
+						<!-- <input class="icon" type="image" src="/static/errorshooting/images/a.png" alt="problem" class="vote_problem" name="submit_problem"> -->
+						</form>
+
+						<label class="count" id="show_problem"> {{pic.vote_problem}}</label>
+
+						<form method="POST" name="form_useful">{% csrf_token %}
+						<input type="hidden" name="id" value={{pic.id}}>	
+						<input class="icon" type="image" src="/static/errorshooting/images/b.png" alt="useful" id="vote_useful" name="submit_useful">
+						</form>
+
+						<label class="count" id="show_useful"> {{pic.vote_useful}} </label>
+					</div>
+					<label> FrostEd | XXX <label>
+				</div><!-- board -->	
+				{% endfor %}					
+            {% else %}
+             	<p>No pic are available.</p>
+            {% endif %}	
+		</div> <!-- main -->
+	{% endblock %}
+</body>

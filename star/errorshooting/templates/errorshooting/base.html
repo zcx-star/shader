@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/static/errorshooting/base.css"/>	
+	{% block extrastyle %}{% endblock %}
+</head>
+
+<body>
+<div id="container">
+	<div id="header">
+		<div id="branding"> <h1>{% block branding %}{% endblock %}</h1> </div>
+		<div id="user_tools"> {% block user_tools %}{% endblock %} </div>
+	</div>
+
+	<div id="content"> {% block content %}{% endblock %} </div>
+
+	<div id="footer"> {% block footer%}{% endblock %} </div>
+</body>
+</html>

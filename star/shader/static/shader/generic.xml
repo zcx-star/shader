@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shader>
+	<name>
+		Generic
+	</name>
+	<info>
+		'基本的标准PBR材质''
+	</info>
+	<URL>
+		'frosted://Hashtag;@13295971-2798-11e4-a893-e663f7334ce5'
+	</URL>
+	<P4>
+		'//ghost/hashtag-dev-world/Data/Source/Shaders/World/Generic/Generic.dbx'
+	</P4>
+</shader>
