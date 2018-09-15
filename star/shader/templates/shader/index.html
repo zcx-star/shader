@@ -15,7 +15,7 @@
         {% if shader_list %}
         <ul>
             {% for shader in shader_list %}
-                <li><a href="{% url 'shader:detail' shader.shader_name %}">{{ shader.shader_name }}</a></li>
+                <li><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}
@@ -25,15 +25,8 @@
 
 	<!-- ////////////////////////////// -->
 	{% block main %}
-	<form action="{% url 'shader:index' %}" method="post">
-			{% csrf_token %}
-			<select onchange="javascript:form.submit()" name="selectShader">
-			{% for shader in shader_list %}
-				<option value = {{ shader.shader_uv}}>{{ shader.shader_name }}</option>
-			{% endfor %}
-			</select>	
-	</form>
-
+    {{ selected_opaque }}
+    {{ selected_uv }}
 	<table>
 		<tr>
             <th class="tableHead">Name</th>
@@ -42,31 +35,46 @@
             <th class="tableHead">Vertex</th>
         </tr>
 
-        <tr>
-            <th></th>
-            <th> 
-                <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
-                <select onchange="javascript:form.submit()" name="selectOpaque">
-                {% for shader in shader_list %}
-                    <option value = {{ shader.shader_opaque}}>{{ shader.shader_opaque }}</option>
-                {% endfor %}
-                </select></form>
-            </th>
-            <th> 
-                <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
-                <select onchange="javascript:form.submit()" name="selectUV">
-                {% for shader in shader_list %}
-                    <option value = {{ shader.shader_uv}}>{{ shader.shader_uv }}</option>
-                {% endfor %}
-                </select></form>
-            </th>
-            <th></th>           
-        </tr>
+        <!-- //////////  Select  ////////// -->
+        <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
+        <tr>           
+            <td></td>
 
+            <td> 
+                <select onchange="javascript:form.submit()" name="selectOpaque">
+                <option value = 'all'>ALL</option>
+                {% for shader in shader_list %}
+                    {% if shader.shader_opaque == selected_opaque %}
+                        <option value = {{ shader.shader_opaque}} selected="selected">{{ shader.shader_opaque }}</option>
+                    {% else %}
+                        <option value = {{ shader.shader_opaque}}>{{ shader.shader_opaque }}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </td>
+
+            <td>                
+                <select onchange="javascript:form.submit()" name="selectUV">
+                <option value = 'all'>ALL</option>
+                {% for shader in shader_list %}
+                    {% if shader.shader_uv == selected_uv %}
+                        <option value = {{ shader.shader_uv}} selected="selected">{{ shader.shader_uv }}</option>
+                    {% else %}
+                        <option value = {{ shader.shader_uv}}>{{ shader.shader_uv }}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </td>
+
+            <td></td>           
+        </tr>
+        </form>
+
+        <!-- //////////  Selected  ////////// -->
         {% if selected_shader %}
             {% for shader in selected_shader %}
                     <tr>
-                        <td>{{ shader.shader_name }}</td>
+                        <td><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></td>
                         <td>{{ shader.shader_opaque }}</td>
                         <td>{{ shader.shader_uv }}</td>
                         <td>{{ shader.shader_vertex }}</td>
