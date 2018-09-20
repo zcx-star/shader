@@ -25,7 +25,7 @@ SECRET_KEY = 'y3ph_d76)9ke9rx!rf_bf)krbgr#cc97r-%dm&x!1pd!3auxs^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.21.51', 'cnshaw1522.virtuosgames.com']
 
 
 # Application definition
@@ -118,4 +118,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+MEDIA_URL='/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
