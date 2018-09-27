@@ -5,7 +5,7 @@ body{
     font-size: 14px;
 /*    font-family: Verdana, Arial, '宋体';*/
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
-    color: #417690;
+    color: #666666;
     background: #fff;
     border: none;
 }
@@ -40,14 +40,17 @@ body{
 }
 
 /*===== content =====*/
+#content{
+    background: #f0f0f0;
+}
 #sidebar{
     float: left;
     padding:30px;
-    background-color: #f0f0f0;
 }
 #main{
-    padding: 30px;
+    padding: 20px;
     margin: 0 0 0 250px;
+    background: #fff;
 }
 
 ul{

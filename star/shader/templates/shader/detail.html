@@ -1,15 +1,184 @@
 <head>
-    <title>{{ shader.shader_name }}</title>
+	{%extends "shader/base.html"%}
+    {% block extrastyle %}
+    	<link rel="stylesheet" type="text/css" href="/static/shader/detail.css"/>
+    {% endblock %}
 </head>
 
-<h1>{{ shader.shader_name }}</h1>
+<body>
+	<!-- /////////////  Sidebar  ///////////////// -->
+	{% block sidebar %}	
+		<ul>
+			<li><a href="{% url 'shader:detail' "aaa" %}" target="_blank">SGN_Emissive_Rotation</a></li>
+			<li><a href="{% url 'shader:detail' "aaa" %}" target="_blank">SGN_Emissive_Rotation</a></li>
+			<li><a href="{% url 'shader:detail' "aaa" %}" target="_blank">SGN_Emissive_Rotation</a></li>
+			<li><a href="{% url 'shader:detail' "aaa" %}" target="_blank">SGN_Emissive_Rotation</a></li>
+		</ul>		
+	{% endblock %}
 
-<h2>Opaque</h2>
-<p>{{ shader.shader_name }}:{{ shader.shader_opaque }}</p>
-<h2>Links</h2>
-<h3>Name</h3>
-<p>{{ shader.shader_name }}</p>
-<h3>UVset</h3>
-<p>{{ shader.shader_uv }}</p>
-<h3>Vertex</h3>
-<p>{{ shader.shader_vertex }}</p>
+
+	<!-- /////////////  Main  ///////////////// -->
+	{% block main %}	
+	<div class="shaderTitle">SGN_Emissive_Rotation</div>
+
+	<!-- /////////////  Links  ///////////////// -->
+	<div class="panel">
+		<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Links</h2></div>
+
+		<table id="links">
+			<tr>
+				<td class="itemTitle"><h4>Local</h4></td>
+				<td class="itemContent">D:\star\star\static\shader</td>
+			</tr>
+			
+			<tr>
+				<td class="itemTitle"><h4>P4</h4></td>
+				<td class="itemContent">//roboto/world/roboto.diceconfig</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>URL</h4></td>
+				<td class="itemContent">frosted://Hashtag;@5b92ab1c-57b0-11e6-bb34-a418d0b900ef</td>			
+			</tr>			
+		</table>
+	</div>
+	<hr>
+
+	<!-- /////////////  Textures  ///////////////// -->
+	<div class="panel">
+		<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Textures</h2></div>		
+
+		<table id="textures">
+			<tr>
+				<th class="tableHeader">Name</th>
+				<th class="tableHeader" colspan="3">Description</th>
+			</tr>
+
+			<tr class="tr_01">
+				<td class = "itemTitle"><h4>Foreground</h4></td>
+				<td class="itemContent">tesCoord0</td>
+				<td class="itemContent">DXT5</td>
+				<td class="itemContent">TagSrgb</td>
+			</tr>
+			
+			<tr class="tr_01">
+				<td class = "itemTitle"><h4></h4></td>
+				<td class="itemContent" colspan="3">
+					<ul>
+						<li><span class="A"><span class="R1">R</span><span class="G1">G</span><span class="B1">B</span></span> <span class="spanContent">颜色</span></li>
+						<li><span class="A">A</span> <span class="spanContent">控制Foreground和Background的mask</span></li>
+					</ul>
+				</td>
+			</tr>
+
+			<tr class="tr_02">
+				<td class = "itemTitle"><h4>Background</h4></td>
+				<td class="itemContent">tesCoord0</td>
+				<td class="itemContent">DXT5</td>
+				<td class="itemContent">TagSrgb</td>
+			</tr>
+
+			<tr class="tr_01">
+				<td class = "itemTitle"><h4>SMD</h4></td>
+				<td class="itemContent">None</td>
+				<td class="itemContent">DXT5</td>
+				<td class="itemContent">TagSrgb</td>
+			</tr>
+
+			<tr class="tr_01">
+				<td class = "itemTitle"><h4></h4></td>
+				<td class="itemContent" colspan="3">
+					<ul>
+						<li><span class="R">R</span> <span class="spanContent">Smoothness</span></li>
+						<li><span class="G">G</span> <span class="spanContent">Metallic  </span></li>
+						<li><span class="B">B</span> <span class="spanContent"></span></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+
+	<!-- /////////////  Parameters  ///////////////// -->
+	<div class="panel">
+		<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Parameters</h2></div>
+
+		<table id="parameter">
+			<tr>
+				<th class="tableHeader">Name</th>
+				<th class="tableHeader">Type</th>
+				<th class="tableHeader">Description</th>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>Foreground</h4>></td>
+				<td class="itemContent">Texture</td>
+				<td class="itemContent">用于旋转的前景图，可以不透，可以透明，可以透出背景图</td>
+			</tr>
+			
+			<tr>
+				<td class="itemTitle"><h4>Background</h4></td>
+				<td class="itemContent">Texture</td>
+				<td class="itemContent">背景图，不透明</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>NeedBackground</h4></td>
+				<td class="itemContent">Boolean</td>
+				<td class="itemContent">是否需要背景图，如果开启了transparent则该功能无效</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>Period</h4></td>
+				<td class="itemContent">int</td>
+				<td class="itemContent">一次旋转循环的时间，数字越大旋转越慢</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>reverse</h4></td>
+				<td class="itemContent">Boolean</td>
+				<td class="itemContent">反转旋转的方向</td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+
+	<!-- /////////////  Usage  ///////////////// -->
+	<div class="panel">
+		<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Usage</h2></div>
+
+		<table id="usage">
+			<tr>				
+				<td class="itemTitle"><h4>VertexColor</h4></td>
+				<td class="itemContent">None</td>
+			</tr>
+			
+			<tr>
+				<td class="itemTitle"><h4>UVSet</h4></td>
+				<td class="itemContent">1</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>SurfaceType</h4></td>
+				<td class="itemContent">Transparent</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>Complexity</h4></td>
+				<td class="itemContent">1</td>
+			</tr>
+
+			<tr>
+				<td class="itemTitle"><h4>Textures</h4></td>
+				<td class="itemContent">3</td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+
+	<!-- /////////////  Example  ///////////////// -->
+	<div class="panel">
+		<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Example</h2></div>
+	</div>
+	{% endblock %} 
+</body>
