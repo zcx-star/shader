@@ -78,3 +78,21 @@ h2,h3,h4{ display: inline; }
     background-color:#fff;
 }
 #parameter h4{ color:#60723e; }
+
+#usage th
+{
+	text-align: left;
+	padding-left: 20px;
+	color: #fff;
+	background-color: #8064a2;	
+}
+#usage tr:nth-child(odd) 
+{
+    background-color:#dfd8e8;
+}
+#usage tr:nth-child(even)
+{
+    background-color:#fff;
+}
+#usage h4{ color:#66478c; }
+#usage .itemcontent{ padding: 2px 60px 2px 20px;}

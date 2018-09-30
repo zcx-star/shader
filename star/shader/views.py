@@ -4,29 +4,35 @@ from django import forms
 from django.utils import timezone
 from .models import Shader
 
-def index(request):		
+def index(request): 
     shader_list = Shader.objects.order_by('shader_name')
 
-    if request.method == "POST":
-        selected_opaque = request.POST['selectOpaque'] 
-        selected_uv = request.POST['selectUV']
+    '''
+    v=0
+    sql = "SELECT * FROM shader_shader WHERE shader_vertexColor=%s" %(v)
+    b=Shader.objects.raw(sql)
+    '''
 
-        if selected_opaque  == 'all':
-            q1 = Shader.objects.all()
-        else:
-            q1 = Shader.objects.filter(shader_opaque = selected_opaque)
 
-        if selected_uv == 'all':
-            q2 = Shader.objects.all()
-        else:
-            selected_uv = int(selected_uv)
-            q2 = Shader.objects.filter(shader_uv = selected_uv )
-        
-        selected_shader = q1.intersection(q2)
-        return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':selected_shader, 'selected_opaque':selected_opaque, 'selected_uv':selected_uv})
+
+    if request.method=="POST":
+        selected_vertexColor = request.POST['selectVertexColor'] 
+        selected_uvSet = request.POST['selectUVSet']
+        selected_surfaceType = request.POST['selectSurfaceType']
+
+        sql="SELECT * FROM shader_shader WHERE shader_surfaceType=%s" %(selected_surfaceType)
+        selected_shader=Shader.objects.raw(sql)
+
+        return render(request, 'shader/index.html', 
+        {'shader_list':shader_list,'selected_shader':selected_shader,
+        'selected_vertexColor':selected_vertexColor,'selected_uvSet':selected_uvSet,
+        'selected_surfaceType':selected_surfaceType
+        })
 
     return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':shader_list})
 
 def detail(request,shader_name):
+    shader_list = Shader.objects.order_by('shader_name')
     shader = get_object_or_404(Shader, pk = shader_name)
-    return render(request, 'shader/detail.html', {'shader':shader})
+    t = 'shader/detail/' + shader_name + '.html'
+    return render(request, t, {'shader':shader, 'shader_list':shader_list})

@@ -1,77 +1,23 @@
-table,tr,th,td{
+table,tr,td
+{
+    table-layout: fixed;
+    overflow:auto;
     border:1px solid #417690;
     border-collapse: collapse;
     line-height: 25px;
-    width: 800px;
 }
 
-tr{
-    text-align: left;
-
-}
-th{
+th
+{
+    text-align: center;
+    padding:2px 6px;
     color: #fff;
-    background-color: #417690;
+    background-color: #417690; 
 }
 
-tr:nth-child(odd) 
-{
-    background-color:#fff;
-}
+.length_01{ width: 200px;}
+.length_02{ width: 70px; }
 
-tr:nth-child(even)
-{
-    background-color:#f0f0f0;
-}
-button{
-	border:0px;
-	background-color: #417690;
-}
-form{
-    margin:0;
-}
-#tableHead{
-	float: left;	
-	margin: 6px 6px 0px 6px;
-}
-#pullDown{
-	text-align: right;
-}
-#select{
-                margin:100px;
-                background: rgba(0,0,0,0);
-                width: 249px;
-                height: 40px;
-                font-family: "微软雅黑";
-                font-size: 18px;
-                color: white;
-                border: 1px #1a1a1a solid;
-                border-radius: 5px;
-            }
-            .select-head{
-                overflow: hidden;
-                width: 249px;
-                height: 40px;
-                box-sizing: border-box;
-                padding: 0 10px;
-                line-height: 40px;
-            }
-            .select-head .select-head-cont{
-                float: left;
-            }
-            .select-head .select-icon{
-                float: right;
-            }
-            .option{
-                text-indent: 10px;
-                margin-top: 1px;
-                width: 249px;
-                color: black;
-                background: rgba(236,111,111,0.1);
-                line-height: 25px;
-                border: 1px #cfcfcf solid;
-                display: none;
-            }
-            .option-item:hover{
-                background: rgba(204,106,67,0.3);
-            }
+tr{ text-align: left; }
+tr:nth-child(odd) { background-color:#fff; }
+tr:nth-child(even){ background-color:#f0f0f0; }

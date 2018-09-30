@@ -6,10 +6,7 @@
 </head>
 
 <body>
-	<!-- ////////////////////////////// -->
-	{% block branding %}Roboto Shader{% endblock %}
 
-	<!-- ////////////////////////////// -->
 	{% block sidebar %}	
         {% if shader_list %}
         <ul>
@@ -22,67 +19,121 @@
         {% endif %}
 	{% endblock %}
 
-	<!-- ////////////////////////////// -->
+
 	{% block main %}
-    {{ selected_opaque }}
-    {{ selected_uv }}
-	<table>
-		<tr>
-            <th class="tableHead">Name</th>
-            <th class="tableHead">Opaque</th>
-            <th class="tableHead">UVset</th>
-            <th class="tableHead">Vertex</th>
-        </tr>
+        <div>selected_vertexColor: {{selected_vertexColor}}</div>
+        <div>selected_uvSet: {{selected_uvSet}}</div>
 
-        <!-- //////////  Select  ////////// -->
-        <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
-        <tr>           
-            <td></td>
+    	<table id="index">
+    		<tr>
+                <th class="length_01">Name</th>
+                <th class="length_02">顶点色</th>
+                <th class="length_02">UV</th>
+                <th class="length_02">类型</th>
+                <th class="length_02">复杂度</th>
+                <th class="length_02">贴图总数</th>
+                <th class="length_02">Diffuse</th>
+                <th class="length_02">Normal</th>
+                <th class="length_02">SMD</th>
+                <th class="length_02">UVTint</th>
+                <th class="length_02">MaskTint</th>
+                <th class="length_02">GlobalDirt</th>
+                <th class="length_02">Emissive</th>
+                <th class="length_02">Wetness</th>
+                <th class="length_02">Parallax</th>
+                <th class="length_02">RetroReflect</th>
+            </tr>
 
-            <td> 
-                <select onchange="javascript:form.submit()" name="selectOpaque">
-                <option value = 'all'>ALL</option>
-                {% for shader in shader_list %}
-                    {% if shader.shader_opaque == selected_opaque %}
-                        <option value = {{ shader.shader_opaque}} selected="selected">{{ shader.shader_opaque }}</option>
-                    {% else %}
-                        <option value = {{ shader.shader_opaque}}>{{ shader.shader_opaque }}</option>
-                    {% endif %}
-                {% endfor %}
-                </select>
-            </td>
+            <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
+            <tr>           
+                <td></td>
 
-            <td>                
-                <select onchange="javascript:form.submit()" name="selectUV">
-                <option value = 'all'>ALL</option>
-                {% for shader in shader_list %}
-                    {% if shader.shader_uv == selected_uv %}
-                        <option value = {{ shader.shader_uv}} selected="selected">{{ shader.shader_uv }}</option>
-                    {% else %}
-                        <option value = {{ shader.shader_uv}}>{{ shader.shader_uv }}</option>
-                    {% endif %}
-                {% endfor %}
-                </select>
-            </td>
+                <td class="selection"> 
+                    <select onchange="javascript:form.submit()" name="selectVertexColor">
 
-            <td></td>           
-        </tr>
-        </form>
+                    <option value = '*'>ALL</option>
 
-        <!-- //////////  Selected  ////////// -->
-        {% if selected_shader %}
-            {% for shader in selected_shader %}
+                    {% with "Ture False" as list %}
+                    {% for i in list.split %}
+                        {% if i == selected_vertexColor %}
+                            <option value = {{ i }} selected="selected">{{ i }}</option>
+                        {% else %}
+                            <option value = {{ i }}>{{ i }}</option>
+                        {% endif %} 
+                    {% endfor %}  
+                    {% endwith %}
+
+                    </select>
+                </td>
+
+                <td class="selection"> 
+                    <select onchange="javascript:form.submit()" name="selectUVSet">
+
+                    <option value = 'all'>ALL</option>
+                    
+                    {% with "0 1 2" as list %}
+                    {% for i in list.split %}
+                        {% if i == selected_UVSet %}
+                            <option value = {{ i }} selected="selected">{{ i }}</option>
+                        {% else %}
+                            <option value = {{ i }}>{{ i }}</option>
+                        {% endif %} 
+                    {% endfor %}  
+                    {% endwith %}
+
+                    </select>
+                </td>
+
+
+                <td class="selection"> 
+                    <select onchange="javascript:form.submit()" name="selectSurfaceType">
+
+                    <option value = 'all'>ALL</option>
+                    
+                    {% with "0 1 2" as list %}
+                    {% for i in list.split %}
+                        {% if i == selected_surfaceType %}
+                            <option value = {{ i }} selected="selected">{{ i }}</option>
+                        {% else %}
+                            <option value = {{ i }}>{{ i }}</option>
+                        {% endif %} 
+                    {% endfor %}  
+                    {% endwith %}
+
+                    </select>
+                </td>
+
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+         
+            </tr>
+            </form>
+
+
+
+            {% if selected_shader %}
+                {% for shader in selected_shader %}
                     <tr>
-                        <td><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></td>
-                        <td>{{ shader.shader_opaque }}</td>
-                        <td>{{ shader.shader_uv }}</td>
-                        <td>{{ shader.shader_vertex }}</td>
+                        <td class="length_01"><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></td>
+                        <td class="length_02">{{ shader.shader_vertexColor }}</td>
+                        <td class="length_02">{{ shader.shader_uvSet }}</td>
+                        <td class="length_02">{{ shader.shader_surfaceType }}</td>
+                        <td class="length_02">{{ shader.shader_complexity }}</td>
+                        <td class="length_02">{{ shader.shader_textures }}</td>
+                        <td class="length_02">{{ shader.shader_diffuseTex }}</td>
+                        <td class="length_02">{{ shader.shader_normalTex }}</td>
+                        <td class="length_02">{{ shader.shader_SMDTex }}</td>
+                        <td class="length_02">{{ shader.shader_uvTint }}</td>
+                        <td class="length_02">{{ shader.shader_maskTint }}</td>
+                        <td class="length_02">{{ shader.shader_globalDirt }}</td>
+                        <td class="length_02">{{ shader.shader_emissive }}</td>
+                        <td class="length_02">{{ shader.shader_wetness }}</td>
+                        <td class="length_02">{{ shader.shader_parallax }}</td>
+                        <td class="length_02">{{ shader.shader_retroReflect }}</td>
                     </tr>        
-            {% endfor %}
-        {% endif %}
-	</table>
+                {% endfor %}
+            {% endif %}
 
-    <img src="/static/shader/Estelle.jpg"  alt="Estelle" />
+    	</table>
 
 	{% endblock %}
 </body>

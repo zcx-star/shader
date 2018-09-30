@@ -1,0 +1,36 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block local %} E:\star\star\static\shader {% endblock %}
+	{% block p4 %} //xxx/world/roboto.diceconfig {% endblock %}
+	{% block url %} frosted://Hashtag;@5b92ab1c-57b0-11e6-bb34-a418d0b900ef {% endblock %}
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/RGBA.html" with texName="Foreground" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/RGB_A.html" with rgbDesc="颜色" alphaDesc="控制Foreground和Background的mask" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/RGBA.html" with texName="Background" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
+	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
+	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
+	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
+	{% endblock %}
+
+	{% block usage %}
+	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
+	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
+	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
+	{% endblock %}
+
+	{% block example %}
+	Here is Example
+	{% endblock %}
+</body>
