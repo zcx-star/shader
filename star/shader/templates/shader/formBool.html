@@ -1,0 +1,14 @@
+<td class="selection"> 
+    <select onchange="javascript:form.submit()" name={{ submitName }}>
+        <option value = 'all'>ALL</option>
+        {% with "Ture False" as list %}
+        {% for i in list.split %}
+            {% if i == selectedOption %}
+                <option value = {{ i }} selected="selected">{{ i }}</option>
+            {% else %}
+                <option value = {{ i }}>{{ i }}</option>
+            {% endif %} 
+        {% endfor %}  
+        {% endwith %}
+    </select>
+</td>

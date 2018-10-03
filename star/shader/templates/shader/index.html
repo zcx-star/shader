@@ -23,6 +23,9 @@
 	{% block main %}
         <div>selected_vertexColor: {{selected_vertexColor}}</div>
         <div>selected_uvSet: {{selected_uvSet}}</div>
+        <div>sql: {{sql}}</div>
+        <div>allNum: {{allNum}}</div>
+        <div>se: {{se}}</div>
 
     	<table id="index">
     		<tr>
@@ -43,72 +46,27 @@
                 <th class="length_02">Parallax</th>
                 <th class="length_02">RetroReflect</th>
             </tr>
-
+            
             <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}
-            <tr>           
-                <td></td>
-
-                <td class="selection"> 
-                    <select onchange="javascript:form.submit()" name="selectVertexColor">
-
-                    <option value = '*'>ALL</option>
-
-                    {% with "Ture False" as list %}
-                    {% for i in list.split %}
-                        {% if i == selected_vertexColor %}
-                            <option value = {{ i }} selected="selected">{{ i }}</option>
-                        {% else %}
-                            <option value = {{ i }}>{{ i }}</option>
-                        {% endif %} 
-                    {% endfor %}  
-                    {% endwith %}
-
-                    </select>
-                </td>
-
-                <td class="selection"> 
-                    <select onchange="javascript:form.submit()" name="selectUVSet">
-
-                    <option value = 'all'>ALL</option>
-                    
-                    {% with "0 1 2" as list %}
-                    {% for i in list.split %}
-                        {% if i == selected_UVSet %}
-                            <option value = {{ i }} selected="selected">{{ i }}</option>
-                        {% else %}
-                            <option value = {{ i }}>{{ i }}</option>
-                        {% endif %} 
-                    {% endfor %}  
-                    {% endwith %}
-
-                    </select>
-                </td>
-
-
-                <td class="selection"> 
-                    <select onchange="javascript:form.submit()" name="selectSurfaceType">
-
-                    <option value = 'all'>ALL</option>
-                    
-                    {% with "0 1 2" as list %}
-                    {% for i in list.split %}
-                        {% if i == selected_surfaceType %}
-                            <option value = {{ i }} selected="selected">{{ i }}</option>
-                        {% else %}
-                            <option value = {{ i }}>{{ i }}</option>
-                        {% endif %} 
-                    {% endfor %}  
-                    {% endwith %}
-
-                    </select>
-                </td>
-
-                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-         
+            <tr>                 
+                <td></td>                
+                {% include "shader/formBool.html" with submitName="selectVertexColor"  selectedOption=selected_vertexColor  %}
+                {% include "shader/formInt3.html" with submitName="selectUVSet"        selectedOption=selected_uvSet        %}
+                {% include "shader/formInt3.html" with submitName="selectSurfaceType"  selectedOption=selected_surfaceType  %}
+                {% include "shader/formInt3.html" with submitName="selectComplexity"   selectedOption=selected_complexity   %}
+                {% include "shader/formInt3.html" with submitName="selectTextures"     selectedOption=selected_textures     %}
+                {% include "shader/formInt3.html" with submitName="selectDiffuseTex"   selectedOption=selected_diffuseTex   %}
+                {% include "shader/formInt3.html" with submitName="selectNormalTex"    selectedOption=selected_normalTex    %}
+                {% include "shader/formInt3.html" with submitName="selectSMDTex"       selectedOption=selected_SMDTex       %}
+                {% include "shader/formBool.html" with submitName="selectUvTint"       selectedOption=selected_uvTint       %}
+                {% include "shader/formBool.html" with submitName="selectMaskTint"     selectedOption=selected_maskTint     %}
+                {% include "shader/formBool.html" with submitName="selectGlobalDirt"   selectedOption=selected_globalDirt   %}
+                {% include "shader/formBool.html" with submitName="selectEmissive"     selectedOption=selected_emissive     %}
+                {% include "shader/formBool.html" with submitName="selectWetness"      selectedOption=selected_wetness      %}
+                {% include "shader/formBool.html" with submitName="selectParallax"     selectedOption=selected_parallax     %}
+                {% include "shader/formBool.html" with submitName="selectRetroReflect" selectedOption=selected_retroReflect %}           
             </tr>
             </form>
-
-
 
             {% if selected_shader %}
                 {% for shader in selected_shader %}
@@ -132,8 +90,6 @@
                     </tr>        
                 {% endfor %}
             {% endif %}
-
     	</table>
-
 	{% endblock %}
 </body>
