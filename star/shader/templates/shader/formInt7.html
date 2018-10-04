@@ -1,14 +1,12 @@
 <td class="selection"> 
     <select onchange="javascript:form.submit()" name={{ submitName }}>
         <option value = 'all'>ALL</option>
-        {% with "True False" as list %}
-        {% for i in list.split %}
+        {% for i in "01234567" %} 
             {% if i == selectedOption %}
                 <option value = {{ i }} selected="selected">{{ i }}</option>
             {% else %}
                 <option value = {{ i }}>{{ i }}</option>
             {% endif %} 
         {% endfor %}  
-        {% endwith %}
     </select>
 </td>

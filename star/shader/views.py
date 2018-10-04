@@ -6,10 +6,20 @@ from .models import Shader
 
 def switchBooleam(selected):
     temp = 'all'
-    if selected == 'Ture':
+    if selected == 'True':
         temp = '1'
     elif selected == 'False':
         temp = '0'
+    return temp
+
+def switchType(selected):
+    temp = 'all'
+    if selected =='Opqaue':
+        temp = '0'
+    elif selected =='Transparent':
+        temp = '1'
+    elif selected =='Translucent':
+        temp = '2'
     return temp
 
 def index(request): 
@@ -17,9 +27,13 @@ def index(request):
 
     if request.method=="POST":
         selected_vertexColor  = request.POST['selectVertexColor']   
-        s_0 = switchBooleam(selected_vertexColor)       
+        s_0 = switchBooleam(selected_vertexColor) 
+
         selected_uvSet        = request.POST['selectUVSet']
+
         selected_surfaceType  = request.POST['selectSurfaceType']
+        s_2 = switchType(selected_surfaceType)
+
         selected_complexity   = request.POST['selectComplexity']
         selected_textures     = request.POST['selectTextures']
         selected_diffuseTex   = request.POST['selectDiffuseTex']
@@ -40,7 +54,7 @@ def index(request):
         selected_retroReflect = request.POST['selectRetroReflect']
         s_14 = switchBooleam(selected_retroReflect)
 
-        selected = [s_0,selected_uvSet,selected_surfaceType,selected_complexity,selected_textures,selected_diffuseTex,selected_normalTex,selected_SMDTex,s_8,s_9,s_10,s_11,s_12,s_13,s_14]
+        selected = [s_0,selected_uvSet,s_2,selected_complexity,selected_textures,selected_diffuseTex,selected_normalTex,selected_SMDTex,s_8,s_9,s_10,s_11,s_12,s_13,s_14]
         allNum = selected.count('all')
 
         sql = "SELECT * FROM shader_shader"
@@ -97,12 +111,14 @@ def index(request):
             "selected_parallax":selected_parallax,
             "selected_retroReflect":selected_retroReflect,
             'sql':sql,
-            'allNum':allNum})
+            'allNum':allNum,
+            's_2':s_2
+            })
 
     return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':shader_list})
 
 def detail(request,shader_name):
     shader_list = Shader.objects.order_by('shader_name')
     shader = get_object_or_404(Shader, pk = shader_name)
-    t = 'shader/detail/' + shader_name + '.html'
-    return render(request, t, {'shader':shader, 'shader_list':shader_list})
+    temp = 'shader/detail/' + shader_name + '.html'
+    return render(request, temp, {'shader':shader, 'shader_list':shader_list})
