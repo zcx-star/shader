@@ -21,32 +21,28 @@
 
 
 	{% block main %}
-        <div>sql: {{sql}}</div>
-        <div>allNum: {{allNum}}</div>
-        <div>s_2: {{ s_2}}</div>
-
     	<table id="index">
     		<tr>
-                <th class="length_01">Name</th>
-                <th class="length_02">顶点色</th>
-                <th class="length_02">UV</th>
-                <th class="length_02">类型</th>
-                <th class="length_02">复杂度</th>
-                <th class="length_02">贴图总数</th>
-                <th class="length_02">Diffuse</th>
-                <th class="length_02">Normal</th>
-                <th class="length_02">SMD</th>
-                <th class="length_02">UVTint</th>
-                <th class="length_02">MaskTint</th>
-                <th class="length_02">GlobalDirt</th>
-                <th class="length_02">Emissive</th>
-                <th class="length_02">Wetness</th>
-                <th class="length_02">Parallax</th>
-                <th class="length_02">RetroReflect</th>
+                <th>Name</th>
+                <th>顶点色</th>
+                <th>UV</th>
+                <th>类型</th>
+                <th>复杂度</th>
+                <th>贴图总数</th>
+                <th>Diffuse</th>
+                <th>Normal</th>
+                <th>SMD</th>
+                <th>UVTint</th>
+                <th>MaskTint</th>
+                <th>GlobalDirt</th>
+                <th>Emissive</th>
+                <th>Wetness</th>
+                <th>Parallax</th>
+                <th>RetroReflect</th>
             </tr>
 
             <tr>                
-                <td><button type="button" onclick="location.href={% url 'shader:index' %}">显示所有</button></td>
+                <td class="selection"><button type="button" onclick="location.href={% url 'shader:index' %}"> 显示所有shader </button></td>
 
                 <form action="{% url 'shader:index' %}" method="post">{% csrf_token %}             
                     {% include "shader/formBool.html" with submitName="selectVertexColor"  selectedOption=selected_vertexColor  %}
@@ -88,8 +84,8 @@
                         <td class="length_02">{{ shader.shader_retroReflect }}</td>
                     </tr>        
                 {% endfor %}
-            {% endif %}
-            
+            {% endif %}            
     	</table>
+               
 	{% endblock %}
 </body>
