@@ -8,17 +8,20 @@
 <body>
 
 	{% block sidebar %}	
+    <ul>
         {% if shader_list %}
-        <ul>
             {% for shader in shader_list %}
                 <li><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></li>
             {% endfor %}
-        </ul>
         {% else %}
-            <p>No shader are available.</p>
+            <li>No shader are available.</li>
         {% endif %}
-	{% endblock %}
 
+        {% for name in newShaders %}
+            <li>{{ name }} </li>
+        {% endfor %}
+    </ul>        
+	{% endblock %}
 
 	{% block main %}
     	<table id="index">

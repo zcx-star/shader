@@ -3,6 +3,25 @@ from django.shortcuts import render,render_to_response,get_object_or_404
 from django import forms
 from django.utils import timezone
 from .models import Shader
+import os
+
+shaderPath = r"D:\Roboto\Data\Source\Shaders\World" 
+pagePath = r"D:\star\shader\templates\shader\detail"
+
+def getFileNames(path):
+    fileNames = []
+    for i,j,k in os.walk(path):
+        for kk in k:
+            if kk.endswith("dbx"):
+                fileNames.append(kk[:-4])
+    return fileNames
+
+def getNewShaders(names, path):
+    newShaders = []
+    for i in names:
+        if not os.path.exists( pagePath + "\\" + i + ".html" ):
+            newShaders.append(i)
+    return newShaders
 
 def switchBooleam(selected):
     temp = 'all'
@@ -24,6 +43,9 @@ def switchType(selected):
 
 def index(request): 
     shader_list = Shader.objects.order_by('shader_name')
+
+    shaderNames = getFileNames(shaderPath)
+    newShaders = getNewShaders(shaderNames, pagePath)
 
     if request.method=="POST":
         selected_vertexColor  = request.POST['selectVertexColor']   
@@ -94,6 +116,7 @@ def index(request):
 
         return render(request, 'shader/index.html',{
             "shader_list":shader_list,
+            "newShaders":newShaders,
             "selected_shader":selected_shader,
             "selected_vertexColor":selected_vertexColor,
             "selected_uvSet":selected_uvSet,
@@ -110,12 +133,9 @@ def index(request):
             "selected_wetness":selected_wetness,
             "selected_parallax":selected_parallax,
             "selected_retroReflect":selected_retroReflect,
-            'sql':sql,
-            'allNum':allNum,
-            's_2':s_2
             })
 
-    return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':shader_list})
+    return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':shader_list,'newShaders':newShaders})
 
 def detail(request,shader_name):
     shader_list = Shader.objects.order_by('shader_name')
