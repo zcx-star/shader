@@ -1,0 +1,9 @@
+{% include "shader/parameter.html" with paraName="detailMask" paraType="Texture" paraDesc="G通道放detailMask" %}
+{% include "shader/parameter.html" with paraName="Dirt_BG" paraType="Texture" paraDesc="Dirt BaseColor" %}
+{% include "shader/parameter.html" with paraName="Dirt_Height_Contrast" paraType="Color" paraDesc="调节detailMask对比度" %}
+{% include "shader/parameter.html" with paraName="Dirt_Height_Offset" paraType="Color" paraDesc="设定detailMask基准高度" %}
+{% include "shader/parameter.html" with paraName="Dirt_Height_Paint_Boost" paraType="Color" paraDesc="调节detailMask强度" %}
+{% include "shader/parameter.html" with paraName="Dirt_NH_BG" paraType="Texture" paraDesc="Normal / Height / Smoothness" %}	
+{% include "shader/parameter.html" with paraName="Dirt_Tiling_BG" paraType="Vector2" paraDesc="Dirt Tiling" %}
+{% include "shader/parameter.html" with paraName="Dirt_Tint_BG" paraType="Color" paraDesc="Dirt_BG调色" %}
+{% include "shader/parameter.html" with paraName="UseWorldProjection" paraType="Boolean" paraDesc="使用世界坐标 / UV" %}

@@ -1,0 +1,27 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}Normal贴图作为基础Normal的同时，以不同的Tiling值和强度作为detail Normal叠加  {%endblock%}	
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Trunk.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Trunk.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@d9aa0ba3-4daa-40f0-9006-dccfc6032c30">frosted://Roboto;@d9aa0ba3-4daa-40f0-9006-dccfc6032c30</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal / detailNormal" bDesc="Smoothness" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="detailMultiplier" paraType="Scalar" paraDesc="detail Normal强度" %}
+	{% include "shader/parameter.html" with paraName="detailUvMultiplier" paraType="Vector2" paraDesc="detail normal的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / DetailNormal / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="uvMultiplier" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="VegetationColor" paraType="Color" paraDesc="BaseColor变色" %}
+	{% endblock %}
+</body>

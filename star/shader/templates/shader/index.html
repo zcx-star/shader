@@ -6,24 +6,25 @@
 </head>
 
 <body>
+    {% block content %}
 
-	{% block sidebar %}	
-    <ul>
-        {% if shader_list %}
-            {% for shader in shader_list %}
-                <li><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></li>
+    <div id="sidebar">
+        <ul>
+            {% if databaseShaders %}
+                {% for shader in databaseShaders %}
+                    <li><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li>No shader are available.</li>
+            {% endif %}
+
+            {% for name in noHtmlShaders %}
+                <li>{{ name }} </li>
             {% endfor %}
-        {% else %}
-            <li>No shader are available.</li>
-        {% endif %}
+        </ul> 
+    </div>   
 
-        {% for name in newShaders %}
-            <li>{{ name }} </li>
-        {% endfor %}
-    </ul>        
-	{% endblock %}
-
-	{% block main %}
+    <div id="main"> 
     	<table id="index">
     		<tr>
                 <th>Name</th>
@@ -89,6 +90,7 @@
                 {% endfor %}
             {% endif %}            
     	</table>
-               
-	{% endblock %}
+    </div>               
+
+    {% endblock %} 
 </body>

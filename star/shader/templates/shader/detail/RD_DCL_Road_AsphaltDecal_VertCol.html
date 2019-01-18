@@ -1,0 +1,44 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Roads\RD_DCL_Road_AsphaltDecal_VertCol.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Roads/RD_DCL_Road_AsphaltDecal_VertCol.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@03ae4829-d1c4-4e4c-92a0-d296da9312e0">frosted://Roboto;@03ae4829-d1c4-4e4c-92a0-d296da9312e0</a> {% endblock %}
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="BaseColor" gDesc="Smoothness"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Height"%} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="detailMask" texCoord="texCoord1" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with gDesc="detailMask"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Dirt_BG" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB.html" with rgbDesc="Dirt BaseColor"%} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Dirt_NH_BG" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RG_B_A.html" with rgDesc="Dirt normal" bDesc="Dirt Height" aDesc="Smoothness"%} </tr>
+
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="alphaSelector" paraType="Vector2" paraDesc="选择Opacity使用的贴图 1/0:使用Diffuse的B通道 0/1:使用Diffuse的Alpha" %}		
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive / Smoothness" %}
+
+	{% include "shader/UT/RD_DirtLayer.html"%}
+
+	{% include "shader/parameter.html" with paraName="Normal" paraType="" paraDesc="Normal / Height" %}
+	{% include "shader/parameter.html" with paraName="Opacity" paraType="Scalar" paraDesc="控制Opacity" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="控制Smoothness" %}
+	{% include "shader/parameter.html" with paraName="SmoothTreshold" paraType="" paraDesc="Smoothness的阈值，低于它的均为0" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Tint" paraType="Color" paraDesc="BaseColor调色" %}
+
+	{% include "shader/UT/WetnessAndPuddles.html"%}
+
+	{% endblock %}
+</body>

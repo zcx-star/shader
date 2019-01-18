@@ -1,0 +1,38 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 一格一格移动 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_NEON_Emissive_Shift_Tint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_NEON_Emissive_Shift_Tint.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@a280a4bc-6e41-11e4-88ca-cebc0524d4a7">frosted://Roboto;@a280a4bc-6e41-11e4-88ca-cebc0524d4a7</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="Emissive" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Blink" paraType="Boolean" paraDesc="是否闪烁" %}
+	{% include "shader/parameter.html" with paraName="BlinkSpeed" paraType="Scalar" paraDesc="闪烁速度" %}
+	{% include "shader/parameter.html" with paraName="colorSplitAt" paraType="Scalar" paraDesc="两种BaseColor的分割比例" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive" %}
+	{% include "shader/parameter.html" with paraName="EmissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="microMove" paraType="Scalar" paraDesc="移动长度" %}
+	{% include "shader/parameter.html" with paraName="NeonColor01" paraType="Color" paraDesc="BaseColor 1" %}
+	{% include "shader/parameter.html" with paraName="NeonColor02" paraType="Color" paraDesc="BaseColor 2" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Metallic / Emissive" %}
+	{% include "shader/parameter.html" with paraName="speed" paraType="Scalar" paraDesc="速度" %}	
+	{% include "shader/parameter.html" with paraName="TimeBalance" paraType="Scalar" paraDesc="发光 / 黑暗偏移值" %}
+	{% include "shader/parameter.html" with paraName="TimeOffset" paraType="Scalar" paraDesc="时间偏移值" %}
+	{% include "shader/parameter.html" with paraName="VerticalSplit" paraType="Boolean" paraDesc="运动方向" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_NEON_Emissive_Shift_Tint.gif"></img>
+	{% endblock %}
+</body>

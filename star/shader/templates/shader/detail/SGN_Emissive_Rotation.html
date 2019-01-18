@@ -3,34 +3,37 @@
 </head>
 
 <body>
-	{% block local %} E:\star\star\static\shader {% endblock %}
-	{% block p4 %} //xxx/world/roboto.diceconfig {% endblock %}
-	{% block url %} frosted://Hashtag;@5b92ab1c-57b0-11e6-bb34-a418d0b900ef {% endblock %}
+	{% block info %} 旋转动画，三个轴向都可以，带不带背景都可以，透明或者不透明 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_Emissive_Rotation.dbx {% endblock %}
+	{% block p4 %}//roboto/world/Data/Source/Shaders/World/Signs/SGN_Emissive_Rotation.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@5b92ab1c-57b0-11e6-bb34-a418d0b900ef">frosted://Roboto;@5b92ab1c-57b0-11e6-bb34-a418d0b900ef</a> {% endblock %}	
 
 	{% block textures %} 
-	<tr class = "tr_01"> {% include "shader/RGBA.html" with texName="Foreground" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
-	<tr class = "tr_01"> {% include "shader/RGB_A.html" with rgbDesc="颜色" alphaDesc="控制Foreground和Background的mask" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Background" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
 
-	<tr class = "tr_02"> {% include "shader/RGBA.html" with texName="Background" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Foreground" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
 
-	<tr class = "tr_01"> {% include "shader/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
-	<tr class = "tr_01"> {% include "shader/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" aDesc="Metallic" %} </tr>	
 	{% endblock %}
 
 	{% block parameters %} 
-	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
-	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
-	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
-	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="用于旋转的前景图，可以不透，可以透明，可以透出背景图" %}
-	{% endblock %}
-
-	{% block usage %}
-	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
-	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
-	{% include "shader/usage.html" with usageName="VertexColor" usageType="None" %}
+	{% include "shader/parameter.html" with paraName="Background" paraType="Texture" paraDesc="背景BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Foreground" paraType="Texture" paraDesc="前景BaseColor" %}
+	{% include "shader/parameter.html" with paraName="NeedBackground" paraType="Boolean" paraDesc="是否需要背景BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Period" paraType="Scalar" paraDesc="周期时长" %}
+	{% include "shader/parameter.html" with paraName="reverse" paraType="Boolean" paraDesc="反向运动" %}
+	{% include "shader/parameter.html" with paraName="RotateAxis" paraType="Vector3" paraDesc="旋转轴向" %}
+	{% include "shader/parameter.html" with paraName="transparent" paraType="Boolean" paraDesc="是否透明" %}
+	{% include "shader/parameter.html" with paraName="WaterCycleTerrain" paraType="Vector4" paraDesc="Smoothness强度微调" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Smoothness_Variation" paraType="Scalar" paraDesc="Smoothness强度微调" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / Metallic" %}
 	{% endblock %}
 
 	{% block example %}
-	Here is Example
+	<img src="/static/shader/images/SGN_Emissive_Rotation.gif"></img>
 	{% endblock %}
 </body>

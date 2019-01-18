@@ -1,0 +1,33 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}需要第二套顶点色，控制AO / Reflectance。Opacity可以随着视线方向变化 {%endblock%}	
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Vista_LODFade_AO_Vertex.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Vista_LODFade_AO_Vertex.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@25e14a44-bc38-4b51-acfa-d2ef16273a38">frosted://Roboto;@25e14a44-bc38-4b51-acfa-d2ef16273a38</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="_DO" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Opacity" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="_NT" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B_A.html" with rgDesc="Normal" bDesc="TintMask" aDesc="Smoothness" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="_DO" paraType="Texture" paraDesc="BaseCOlor / Opacity" %}
+	{% include "shader/parameter.html" with paraName="_NT" paraType="Texture" paraDesc="Normal / TintMask / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="AngleOpacityMax" paraType="Scalar" paraDesc="随视线方向变化Opacity的最大值" %}
+	{% include "shader/parameter.html" with paraName="AngleOpacityMin" paraType="Scalar" paraDesc="随视线方向变化Opacity的最小值" %}
+	{% include "shader/parameter.html" with paraName="AngleOpacityTrigger" paraType="Boolean" paraDesc="是否开启Opacity随视线方向变化的功能" %}
+	{% include "shader/parameter.html" with paraName="ColorBreakMultiplier" paraType="Scalar" paraDesc="噪点强度" %}
+	{% include "shader/parameter.html" with paraName="MixNormals" paraType="Boolean" paraDesc="开启双面光照计算" %}
+	{% include "shader/parameter.html" with paraName="NormalMultiplier" paraType="Scalar" paraDesc="Normal强度" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness强度" %}
+	{% include "shader/parameter.html" with paraName="TintColor" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="TranslucencyMultiplier" paraType="Scalar" paraDesc="SubSurfaceTranslucency强度" %}
+	{% endblock %}
+</body>

@@ -1,0 +1,39 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 两种颜色的透明霓虹灯 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_D_Opacity_Emissive.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_D_Opacity_Emissive.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@28a94a6a-120a-4043-9cf6-95a1e465c6a6">frosted://Roboto;@28a94a6a-120a-4043-9cf6-95a1e465c6a6</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="基础Mask" gDesc="加强Mask，比如外部轮廓线" %} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="EmissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="Inside_Emissive_Color" paraType="Color" paraDesc="BaseColor / 内部EmissiveColor" %}
+	{% include "shader/parameter.html" with paraName="is_both" paraType="Scalar" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="is_outline" paraType="Scalar" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Outside_Emissive_Color" paraType="Color" paraDesc="外部EmissiveColor" %}
+	{% include "shader/parameter.html" with paraName="ramp_tightness" paraType="Scalar" paraDesc="Mask对比度" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>如果is_ouline设置为0，就只有R通道，is_both调节无效</div>
+	<br>
+	<div>is_outline和is_both的极端数值控制Diffuse的R和G混合</div>
+	<table class="common">
+		<tr> <th>is_both</th> <th>is_outline</th> <th></th> </tr>
+		<tr> <td>0</td> <td>0</td> <td>R</td> </tr>
+		<tr> <td>1</td> <td>0</td> <td>R</td> </tr>
+		<tr> <td>0</td> <td>1</td> <td>G</td> </tr>
+		<tr> <td>1</td> <td>1</td> <td>R+G</td> </tr> 
+	</table>
+	{% endblock %}
+</body>

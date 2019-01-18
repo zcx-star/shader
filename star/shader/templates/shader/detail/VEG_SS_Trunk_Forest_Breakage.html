@@ -1,0 +1,28 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}带TrunkBreak，有AO {%endblock%}	
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Trunk_Forest_Breakage.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Trunk_Forest_Breakage.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@8d3ba820-ecb3-4a65-a0bd-242e100ea3f3">frosted://Roboto;@8d3ba820-ecb3-4a65-a0bd-242e100ea3f3</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Smoothness / AO"%} </tr>
+
+	{% endblock %}
+
+	{% block parameters %}
+	{% include "shader/parameter.html" with paraName="brk_BreakSurfaceColor" paraType="Color" paraDesc="内置Diffuse变色" %}
+	{% include "shader/parameter.html" with paraName="brk_breakUvMultiplier" paraType="Vector2" paraDesc="内置贴图UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="ColorTint" paraType="Color" paraDesc="BaseColor变色（但是没有连上）" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / Smoothness / AO" %}
+	{% include "shader/parameter.html" with paraName="uvMultiplier" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% endblock %}
+</body>

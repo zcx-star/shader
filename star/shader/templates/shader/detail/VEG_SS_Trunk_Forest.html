@@ -1,0 +1,31 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}Smoothness带Wetness，有Reflectance，没有detail Normal {%endblock%}	
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Trunk_Forest.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Trunk_Forest.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@eb4de4f7-bc08-494d-ad54-66ccd8229391">frosted://Roboto;@eb4de4f7-bc08-494d-ad54-66ccd8229391</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B_A.html" with rgDesc="Normal" bDesc="Smoothness" aDesc="Reflctance"%} </tr>
+
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / Smoothness / Reflctance" %}
+	{% include "shader/parameter.html" with paraName="uvMultiplier" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="WaterCycle" paraType="Color" paraDesc="Wetness曲线" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>Wetness曲线</div>
+	<img src="/static/shader/images/wetness.png"></img>
+	{% endblock %}
+</body>

@@ -7,6 +7,7 @@ import os
 
 shaderPath = r"D:\Roboto\Data\Source\Shaders\World" 
 pagePath = r"D:\star\shader\templates\shader\detail"
+versionFile = r"D:\star\shader\static\shader\python\headVersions.txt"
 
 def getFileNames(path):
     fileNames = []
@@ -16,12 +17,18 @@ def getFileNames(path):
                 fileNames.append(kk[:-4])
     return fileNames
 
-def getNewShaders(names, path):
-    newShaders = []
+def getNoHtmlShaders(names, path):
+    noHtmlShaders = []
     for i in names:
         if not os.path.exists( pagePath + "\\" + i + ".html" ):
-            newShaders.append(i)
-    return newShaders
+            noHtmlShaders.append(i)
+    return noHtmlShaders
+
+def readTxt(dataFile):
+    f = open(dataFile, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
 
 def switchBooleam(selected):
     temp = 'all'
@@ -41,11 +48,14 @@ def switchType(selected):
         temp = '2'
     return temp
 
-def index(request): 
-    shader_list = Shader.objects.order_by('shader_name')
+# ==========
+# templates
+# ==========
 
-    shaderNames = getFileNames(shaderPath)
-    newShaders = getNewShaders(shaderNames, pagePath)
+def index(request): 
+    databaseShaders = Shader.objects.order_by('shader_name')
+    p4ShaderNames = getFileNames(shaderPath)
+    noHtmlShaders = getNoHtmlShaders(p4ShaderNames, pagePath)
 
     if request.method=="POST":
         selected_vertexColor  = request.POST['selectVertexColor']   
@@ -114,9 +124,9 @@ def index(request):
 
         selected_shader=Shader.objects.raw(sql)
 
-        return render(request, 'shader/index.html',{
-            "shader_list":shader_list,
-            "newShaders":newShaders,
+        return render(request, 'shader/index.html',{ 
+            "databaseShaders":databaseShaders,
+            "noHtmlShaders":noHtmlShaders,
             "selected_shader":selected_shader,
             "selected_vertexColor":selected_vertexColor,
             "selected_uvSet":selected_uvSet,
@@ -135,10 +145,17 @@ def index(request):
             "selected_retroReflect":selected_retroReflect,
             })
 
-    return render(request, 'shader/index.html', {'shader_list':shader_list,'selected_shader':shader_list,'newShaders':newShaders})
+    return render( request, 'shader/index.html', {"databaseShaders":databaseShaders, "noHtmlShaders":noHtmlShaders, "selected_shader":databaseShaders} )
 
 def detail(request,shader_name):
-    shader_list = Shader.objects.order_by('shader_name')
+    databaseShaders = Shader.objects.order_by('shader_name')
     shader = get_object_or_404(Shader, pk = shader_name)
-    temp = 'shader/detail/' + shader_name + '.html'
-    return render(request, temp, {'shader':shader, 'shader_list':shader_list})
+    template = 'shader/detail/' + shader_name + '.html'
+    return render(request, template, {'shader':shader, 'shader_list':databaseShaders})
+
+def update(request):
+    databaseShaders = Shader.objects.order_by('shader_name') 
+    shaderNames = getFileNames(shaderPath) 
+    noHtmlShaders = getNoHtmlShaders(shaderNames, pagePath) 
+    latestVersions = readTxt(versionFile)
+    return render(request, 'shader/update.html',{"databaseShaders":databaseShaders, "noHtmlShaders":noHtmlShaders, "latestVersions":latestVersions })

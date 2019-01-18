@@ -1,0 +1,22 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 基本纯参数，内置脏迹贴图只作用于Reflectance，三向投射带Tiling，如果需要透明材质请选择<a href="{% url 'shader:detail' "Glass_NoTexture_Transparent_Dirt" %}" target="_blank">Glass_NoTexture_Transparent_Dirt</a>{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Glass\Glass_Generic_Dirt.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Glass/Glass_Generic_Dirt.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@65256a26-e575-4eb5-99f3-8b9a380a98cb">frosted://Roboto;@65256a26-e575-4eb5-99f3-8b9a380a98cb</a> {% endblock %}	
+
+	{% block textures %} 
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Color" paraDesc="BaseColor" %}	
+	{% include "shader/parameter.html" with paraName="DirtAmount" paraType="Scalar" paraDesc="脏迹强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="SmoothnessScaler" paraType="Color" paraDesc="Smoothness强度" %}	
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling(三向投射，脏迹贴图内置)" %}
+	{% endblock %}
+</body>

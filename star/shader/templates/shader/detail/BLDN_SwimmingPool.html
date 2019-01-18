@@ -1,0 +1,23 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 游泳池专用shader，parallax，内置泳池贴图 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\BLDN_SwimmingPool.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/BLDN_SwimmingPool.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@85ffb18d-c2db-4a97-8e4d-0586e4a81012">frosted://Roboto;@85ffb18d-c2db-4a97-8e4d-0586e4a81012</a> {% endblock %}	
+
+	{% block textures %} 
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Depth" paraType="Scalar" paraDesc="深度" %}
+	{% include "shader/parameter.html" with paraName="Distortion" paraType="Scalar" paraDesc="能看清底部的程度" %}
+	{% include "shader/parameter.html" with paraName="Scattering_Strength" paraType="Scalar" paraDesc="VolumentricColor影响到的高度" %}
+	{% include "shader/parameter.html" with paraName="Speed" paraType="Scalar" paraDesc="水波运动速度" %}
+	{% include "shader/parameter.html" with paraName="VolumentricColor" paraType="Color" paraDesc="水底颜色" %}
+	{% include "shader/parameter.html" with paraName="WavesStrength" paraType="Scalar" paraDesc="水波强度" %}
+	{% endblock %}
+</body>

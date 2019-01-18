@@ -1,0 +1,31 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 亮哥写的魔性效果 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_ProceduralBuildingBase.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_ProceduralBuildingBase.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@2bb79be5-4a6d-11e6-b8eb-a69b0f468151">frosted://Roboto;@2bb79be5-4a6d-11e6-b8eb-a69b0f468151</a> {% endblock %}	
+
+	{% block textures %}	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="detailsVisibleRange01" paraType="Scalar" paraDesc="细节可见范围最小值" %}
+	{% include "shader/parameter.html" with paraName="detailsVisibleRange02" paraType="Scalar" paraDesc="细节可见范围最大值" %}
+	{% include "shader/parameter.html" with paraName="EmissivePower" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="gapSize" paraType="Scalar" paraDesc="缺口尺寸" %}
+	{% include "shader/parameter.html" with paraName="gradiantColor1" paraType="Color" paraDesc="BaseColor 1" %}
+	{% include "shader/parameter.html" with paraName="gradiantColor2" paraType="Color" paraDesc="BaseColor 2" %}
+	{% include "shader/parameter.html" with paraName="normalIntensity" paraType="Scalar" paraDesc="Noemal强度" %}
+	{% include "shader/parameter.html" with paraName="roundTubes" paraType="Boolean" paraDesc="圆锥 / 金字塔" %}
+	{% include "shader/parameter.html" with paraName="segments" paraType="Scalar" paraDesc="密度" %}
+	{% include "shader/parameter.html" with paraName="speed" paraType="Scalar" paraDesc="速度" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_ProceduralBuildingBase.gif"></img>
+	{% endblock %}
+</body>

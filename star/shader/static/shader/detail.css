@@ -96,3 +96,27 @@ h2,h3,h4{ display: inline; }
 }
 #usage h4{ color:#66478c; }
 #usage .itemcontent{ padding: 2px 60px 2px 20px;}
+
+.info
+{ 
+	font-size: 16px;
+	padding-left: 20px;
+}
+
+.common th
+{
+	border:1px solid black;
+	padding:2px 6px;
+}
+
+.common tr
+{
+	border:1px solid black;
+	padding:2px 6px;
+}
+
+.common td
+{
+	border:1px solid black;
+	padding:2px 6px;
+}

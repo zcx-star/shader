@@ -1,0 +1,40 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 两张广告通过转场动画切换，广告本身无任何可以调节的属性，转场动画可以选择样式，方向，调节速度等 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_2AdDissolve.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_2AdDissolve.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@3788686b-a2cf-11e4-b310-b938bd838733">frosted://Roboto;@3788686b-a2cf-11e4-b310-b938bd838733</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="DissolvePattern" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="转场样式A" gDesc="转场样式B" bDesc="转场样式A的Reflectance" aDesc="转场样式B的Reflectance"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Texture01" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Texture02" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="DissolvePattern" paraType="Texture" paraDesc="转场样式" %}
+	{% include "shader/parameter.html" with paraName="FrameHold" paraType="Scalar" paraDesc="循环时间（不能低于4）" %}
+	{% include "shader/parameter.html" with paraName="g_EmissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="PatternSelector" paraType="Boolean" paraDesc="选择转场样式" %}
+	{% include "shader/parameter.html" with paraName="PatternTiling" paraType="Vector4" paraDesc="转场样式UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Texture01" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Texture02" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="TransitionDirection" paraType="Boolean" paraDesc="转场方向水平 /竖直" %}
+	{% include "shader/parameter.html" with paraName="TransitionParallax" paraType="Boolean" paraDesc="转场时是否开启parallax效果" %}
+	{% include "shader/parameter.html" with paraName="TransitionParallaxStrenght" paraType="Scalar" paraDesc="转场时的parallax强度" %}
+	{% include "shader/parameter.html" with paraName="TransitionSpeed" paraType="Scalar" paraDesc="转场速度" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_2AdDissolve.gif"></img>
+	{% endblock %}
+
+</body>

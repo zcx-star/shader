@@ -1,0 +1,29 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} Choose_Blinds_Horizontal和Choose_Blinds_Vertical调节Diffuse和内置百叶窗贴图的UV偏移 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\Generic\BLDN_Windows_Low_Blinds_2UV_Emissive.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/Generic/BLDN_Windows_Low_Blinds_2UV_Emissive.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@7529bc1d-5bee-4737-a846-ec11709ed2c9">frosted://Roboto;@7529bc1d-5bee-4737-a846-ec11709ed2c9</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor / Emissive" aDesc="BaseColor / Emissive 调整" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive / 调整" %}
+	{% include "shader/parameter.html" with paraName="MetallicFilm" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="Blinds_Color" paraType="Color" paraDesc="百叶窗变色，百叶窗贴图内置" %}
+	{% include "shader/parameter.html" with paraName="BlindsEmissive" paraType="Scalar" paraDesc="百叶窗Emissive" %}
+	{% include "shader/parameter.html" with paraName="Choose_Blinds_Horizontal" paraType="Scalar" paraDesc="UV横向偏移值" %}
+	{% include "shader/parameter.html" with paraName="Choose_Blinds_Vertical" paraType="Scalar" paraDesc="UV竖向偏移值" %}
+	{% include "shader/parameter.html" with paraName="Dirt_Tiling" paraType="Vector2" paraDesc="Dirt UV Tiling，脏迹贴图内置" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Power" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="WindowTransperacy" paraType="Scalar" paraDesc="窗户透明度，控制BaseColor" %}
+	{% include "shader/parameter.html" with paraName="EmissiveTint" paraType="Color" paraDesc="Emissive变色" %}
+	{% endblock %}	
+</body>

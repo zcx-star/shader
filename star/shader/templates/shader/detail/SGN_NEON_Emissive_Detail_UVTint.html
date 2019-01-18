@@ -1,0 +1,39 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 带4向变色 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_NEON_Emissive_Detail_UVTint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_NEON_Emissive_Detail_UVTint.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@8e794259-a09f-470b-a883-76e9cc0bb6d2">frosted://Roboto;@8e794259-a09f-470b-a883-76e9cc0bb6d2</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" aDesc="Metallic" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="colorTint" paraType="Color" paraDesc="Diffuse变色" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Scale" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Metallic" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint0" paraType="Color" paraDesc="调节UV轴向0-1之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint1" paraType="Color" paraDesc="调节UV轴向1-2之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint2" paraType="Color" paraDesc="调节UV轴向2-3之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint3" paraType="Color" paraDesc="调节UV轴向3-4之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UvTintAxisY" paraType="Boolean" paraDesc="控制沿X轴还是Y轴Tint" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>该变色不受UV Tiling的影响</div>
+	<img src="/static/shader/images/UT_UVtint_4x.png"></img>
+	{% endblock %}
+</body>

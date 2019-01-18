@@ -1,0 +1,44 @@
+<head>
+	{%extends "shader/base.html"%}
+    {% block extrastyle %}
+        <link rel="stylesheet" type="text/css" href="/static/shader/update.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/shader/index.css"/>         
+    {% endblock %}
+</head>
+
+<body>
+	{% block content %}
+        <div id = "left">
+            <table id="index" class = "sortable">
+                <tr> <th class="rightAlign">P4 Version</th> </tr>
+                {% for i in latestVersions %}
+                    <tr> <td class="rightAlign">{{ i }}</td> </tr>        
+                {% endfor %} 
+            </table> 
+        </div>
+
+         <div id = "right">
+            <table id="index" class = "sortable">
+                <tr> 
+                    <th>Database</th> 
+                    <th>WikiVersion</th> 
+                </tr>
+
+                {% for shader in databaseShaders %}
+                    <tr> 
+                        <td class="length_01">{{ shader.shader_wikiVersion }}</td> 
+                        <td class="length_02"><a href="{% url 'shader:detail' shader.shader_name %}" target="_blank">{{ shader.shader_name }}</a></td>              
+                    </tr> 
+                {% endfor %} 
+
+                {% for shader in noHtmlShaders %}
+                    <tr> 
+                        <td class="length_01">0</td> 
+                        <td class="length_02">{{ shader }}</td> 
+                        
+                    </tr> 
+                {% endfor %} 
+            </table> 
+        </div>
+	{% endblock %}
+</body>

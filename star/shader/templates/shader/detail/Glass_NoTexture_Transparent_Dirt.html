@@ -1,0 +1,23 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}<a href="{% url 'shader:detail' "Glass_Generic_Dirt" %}" target="_blank">Glass_Generic_Dirt</a>的transparent版本{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Glass\Glass_NoTexture_Transparent_Dirt.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Glass/Glass_NoTexture_Transparent_Dirt.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@9779ae22-ca04-48aa-a5fb-1c40a7d58a90">frosted://Roboto;@9779ae22-ca04-48aa-a5fb-1c40a7d58a90</a> {% endblock %}	
+
+	{% block textures %} 
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Color" paraDesc="BaseColor" %}	
+	{% include "shader/parameter.html" with paraName="DirtAmount" paraType="Scalar" paraDesc="脏迹强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="Opacity" paraType="Color" paraDesc="Opacity强度" %}
+	{% include "shader/parameter.html" with paraName="SmoothnessScaler" paraType="Color" paraDesc="Smoothness强度" %}	
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling(三向投射，脏迹贴图内置)" %}
+	{% endblock %}
+</body>

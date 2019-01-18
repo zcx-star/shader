@@ -1,0 +1,45 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 
+	<div>两层材质叠加，由顶点色的B通道控制</div>
+	<div>● 永远存在： detailUvMultiplier * Normal_Tiling贴图 * detailMultiplier强度</div>
+	<div>● 黑色部分： uvMultiplier * Normal贴图 * normalMultiplier强度</div>
+	<div>● 白色部分： uvTilingMultiplier * Normal_Tiling贴图 * normalMultiplier强度</div>
+	{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Trunk_AO_Vertex.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Trunk_AO_Vertex.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@6ac430dd-d79c-4ca4-b1d0-7962cb5a9a52">frosted://Roboto;@6ac430dd-d79c-4ca4-b1d0-7962cb5a9a52</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Smoothness" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse_Tiling" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal_Tiling" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Smoothness" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="brk_BreakSurfaceColor" paraType="Color" paraDesc="内置Diffuse变色" %}
+	{% include "shader/parameter.html" with paraName="brk_breakUvMultiplier" paraType="Vector2" paraDesc="内置贴图UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="brk_UseBreakageBlending" paraType="Boolean" paraDesc="是否激活BreakageBlending, 激活的话会跟内置的一套贴图再进行混合" %}
+	{% include "shader/parameter.html" with paraName="detailMultiplier" paraType="Scalar" paraDesc="法线强度" %}
+	{% include "shader/parameter.html" with paraName="detailUvMultiplier" paraType="Vector2" paraDesc="Normal_Tiling的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Diffuse_Tiling" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Normal_Tiling" paraType="Texture" paraDesc="Normal / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="normalMultiplier" paraType="Scalar" paraDesc="法线强度" %}
+	{% include "shader/parameter.html" with paraName="OcclusionOpacity" paraType="Scalar" paraDesc="顶点色R通道的强度，控制AO" %}
+	{% include "shader/parameter.html" with paraName="UseTextureBlending" paraType="Boolean" paraDesc="是否使用Diffuse_Tiling贴图和Normal_Tiling贴图" %}
+	{% include "shader/parameter.html" with paraName="uvMultiplier" paraType="Vector2" paraDesc="Diffuse和Normal的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="uvTilingMultiplier" paraType="Vector2" paraDesc="Diffuse_Tiling和Normal_Tiling的UV Tiling" %}
+	{% endblock %}
+</body>

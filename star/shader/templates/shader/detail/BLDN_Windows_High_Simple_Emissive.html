@@ -1,0 +1,34 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} UV在y轴方向的摆放位置控制窗帘区域，玻璃脏迹内置 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\Generic\BLDN_Windows_High_Simple_Emissive.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/Generic/BLDN_Windows_High_Simple_Emissive.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@71130564-b40f-4ad5-b9f8-4768b7bec847"> frosted://Roboto;@71130564-b40f-4ad5-b9f8-4768b7bec847 </a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="WindowInteriors" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>	
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="WindowNormal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="BaseSmoothness" paraType="Scalar" paraDesc="基础Smoothness" %}
+	{% include "shader/parameter.html" with paraName="CurtainColor" paraType="Color" paraDesc="窗帘颜色" %}
+	{% include "shader/parameter.html" with paraName="DirtGlassUVTile" paraType="Vector2" paraDesc="Dirt UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="DirtLevel" paraType="Scalar" paraDesc="Dirt强度" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Intensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="EmissiveColor" paraType="Color" paraDesc="Emissive" %}
+	{% include "shader/parameter.html" with paraName="MetallicFilm" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="UVOffset" paraType="Vector2" paraDesc="BaseColor和Normal的UV偏移值" %}
+	{% include "shader/parameter.html" with paraName="WindowInteriors" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="WindowNormal" paraType="Texture" paraDesc="Normal" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>y<0为窗帘变色区域</div>
+	<img src="/static/shader/images/yAxis.png"></img>
+	{% endblock %}
+</body>

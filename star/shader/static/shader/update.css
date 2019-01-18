@@ -1,0 +1,19 @@
+#left
+{
+	float:left;
+
+}
+
+#middle
+{
+	float:left;
+}
+
+.rightAlign
+{
+	text-align: right;
+}
+
+a{
+    color: #5ab1dc;
+}

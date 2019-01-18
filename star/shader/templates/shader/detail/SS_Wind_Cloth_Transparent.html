@@ -1,0 +1,47 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 和<a href="{% url 'shader:detail' "SS_Wind_Cloth" %}" target="_blank">SS_Wind_Cloth</a>的区别是Opacity是transparent的{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\SubSurface\SS_Wind_Cloth_Transparent.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/SubSurface/SS_Wind_Cloth_Transparent.dbx{% endblock %}
+	{% block url %} <a href="frosted://Roboto;@812a7e48-7364-4544-b506-a990e27cae06">frosted://Roboto;@812a7e48-7364-4544-b506-a990e27cae06</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Opacity"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" bDesc="TintMask" aDesc="SubSurface Translucency"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Angle" paraType="Float" paraDesc="褶皱旋转角度" %}
+	{% include "shader/parameter.html" with paraName="Color" paraType="Color" paraDesc="Diffuse变色" %}
+	{% include "shader/parameter.html" with paraName="FoldScale" paraType="Vector2" paraDesc="褶皱UV Tiling, 贴图内置" %}
+	{% include "shader/parameter.html" with paraName="nmapScrolling" paraType="Vector2" paraDesc="褶皱速度" %}
+	{% include "shader/parameter.html" with paraName="ObjectOrientation_WorldY" paraType="Scalar" paraDesc="WindOrientation_WorldY - ObjectOrientation_WorldY" %}
+	{% include "shader/parameter.html" with paraName="opacity" paraType="Color" paraDesc="Opacity强度" %}
+	{% include "shader/parameter.html" with paraName="SMD_Tiling_Multiplier" paraType="Scalar" paraDesc="SMD UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness强度" %}
+	{% include "shader/parameter.html" with paraName="TranslucencyScale" paraType="Scalar" paraDesc="SubSurface Translucency强度" %}
+	{% include "shader/parameter.html" with paraName="WaterCycle" paraType="Color" paraDesc="Smoothness偏移值" %}
+	{% include "shader/parameter.html" with paraName="WindOrientation_WorldY" paraType="Scalar" paraDesc="WindOrientation_WorldY - ObjectOrientation_WorldY" %}
+	{% include "shader/parameter.html" with paraName="WindStrenght" paraType="Vector4" paraDesc="褶皱强度及速度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic贴图，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Smoothness_Variation" paraType="Scalar" paraDesc="Smoothness强度（只允许微调）" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Opacity" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / TintMask / SubSurface Translucency" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>WindOrientation_WorldY - ObjectOrientation_WorldY = 风向角度，范围为0~360度</div>
+	<div>sin（风向角度） * nmapScrolling * WindStrenght控制褶皱</div>
+	{% endblock %}
+</body>

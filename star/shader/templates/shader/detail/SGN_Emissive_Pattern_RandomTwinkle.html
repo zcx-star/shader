@@ -1,0 +1,28 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 模拟LED面板不规则跳动 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_Emissive_Pattern_RandomTwinkle.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_Emissive_Pattern_RandomTwinkle.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@8eceb9d5-3d2d-4422-a2d4-4f370ba5b64e">frosted://Roboto;@8eceb9d5-3d2d-4422-a2d4-4f370ba5b64e</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Texture" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="EmissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="LightColor" paraType="Color" paraDesc="亮点颜色" %}
+	{% include "shader/parameter.html" with paraName="PanelColor" paraType="Color" paraDesc="面板颜色" %}
+	{% include "shader/parameter.html" with paraName="PatternDensity" paraType="Scalar" paraDesc="密度" %}
+	{% include "shader/parameter.html" with paraName="Speed" paraType="Scalar" paraDesc="速度" %}
+	{% include "shader/parameter.html" with paraName="Texture" paraType="Texture" paraDesc="LED样式" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_Emissive_Pattern_RandomTwinkle.gif"></img>
+	{% endblock %}
+</body>

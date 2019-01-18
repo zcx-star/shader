@@ -1,0 +1,20 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 透明材质，纯参数，Opacity内置为0.597 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_TintOnly_AlphaB.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_TintOnly_AlphaB.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@d4bb6ef6-45e1-4215-90e8-90acb6d8c151">frosted://Roboto;@d4bb6ef6-45e1-4215-90e8-90acb6d8c151</a> {% endblock %}
+
+	{% block textures %} 
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="BaseColor" paraType="Color" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="MetalMask" paraType="Scalar" paraDesc="Metallic" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness" %}
+	{% endblock %}
+</body>

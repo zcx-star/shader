@@ -1,0 +1,30 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} Diffuse只用于TintMask和Opacity，四象限变色 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Decals\DCL_D_Opacity_QuadTint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Decals/DCL_D_Opacity_QuadTint.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@f2792f7f-eeea-4786-9890-b95703c81c7f">frosted://Roboto;@f2792f7f-eeea-4786-9890-b95703c81c7f</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="TintMask" bDesc="Opacity"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Alpha_Override" paraType="Scalar" paraDesc="Opacity强度" %}
+	{% include "shader/parameter.html" with paraName="Color_Q1" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Color_Q2" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Color_Q3" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Color_Q4" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="TintMask / Opacity" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>Color_Q的UV摆放象限</div>
+	<img src="/static/shader/images/TintColor_02.png"></img>
+	{% endblock %}
+</body>

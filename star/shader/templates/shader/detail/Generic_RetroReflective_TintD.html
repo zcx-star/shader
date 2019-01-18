@@ -1,0 +1,28 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} SMD的B通道作为BaseColor和Emissive，没有Diffuse {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Roads\Generic_RetroReflective_TintD.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Roads/Generic_RetroReflective_TintD.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@343fd95c-8a63-44dc-8d8f-e13bdbacc0f6">frosted://Roboto;@343fd95c-8a63-44dc-8d8f-e13bdbacc0f6</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" bDesc="BaseColor / Emissive / EmissiveIntensity" aDesc="Metallic"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="ColorTweak" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="EmissiveColor" paraType="Color" paraDesc="Emissive" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic贴图，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Smoothness_Variation" paraType="Scalar" paraDesc="Smoothness强度微调" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / detailMask / Metallic" %}
+	{% endblock %}
+</body>

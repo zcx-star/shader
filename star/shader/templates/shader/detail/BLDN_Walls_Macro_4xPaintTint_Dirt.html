@@ -1,0 +1,63 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 
+	<div>四象限的UVTint，一层基础材质，叠加一层Normal+内置Dirt，再加上GlobalDirt</div>
+	<div>和<a href="{% url 'shader:detail' "BLDN_Walls_Macro_4XDiffuseTint_Dirt" %}" target="_blank">BLDN_Walls_Macro_4XDiffuseTint_Dirt</a>的区别是对paint的区域增加了Metallic和Smoothness的控制</div>
+
+	 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\Generic\BLDN_Walls_Macro_4xPaintTint_Dirt.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/Generic/BLDN_Walls_Macro_4xPaintTint_Dirt.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@12027e5c-6c9f-4d23-a95b-56322e424ea5">frosted://Roboto;@12027e5c-6c9f-4d23-a95b-56322e424ea5</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" bDesc="detailMask" aDesc="Metallic"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="MacroNormal" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="AO / Reflectance / Smoothness" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="_paintColor_Q1" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="_paintColor_Q2" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="_paintColor_Q3" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="_paintColor_Q4" paraType="Color" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="_paintColorOpacity" paraType="Scalar" paraDesc="detailMask强度" %}
+	{% include "shader/parameter.html" with paraName="_paintMaskEnable" paraType="Boolean" paraDesc="是否使用detailMask贴图" %}
+	{% include "shader/parameter.html" with paraName="_paintSmoothness" paraType="Scalar" paraDesc="和Smoothness贴图进行叠加" %}
+	{% include "shader/parameter.html" with paraName="_paintSmoothnessMultiplyEnable" paraType="Boolean" paraDesc="Smoothness贴图和_paintSmoothness是相乘还是互斥" %}
+	{% include "shader/parameter.html" with paraName="_paintSmoothnessOpacity" paraType="Scalar" paraDesc="paint Smoothness强度" %}
+	{% include "shader/parameter.html" with paraName="Detail_Tiling" paraType="Scalar" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="dirtColorA" paraType="Color" paraDesc="dirtA变色" %}
+	{% include "shader/parameter.html" with paraName="dirtColorB" paraType="Color" paraDesc="dirtB变色" %}
+	{% include "shader/parameter.html" with paraName="dirtMaskOpacity_A" paraType="Scalar" paraDesc="dirtA强度" %}
+	{% include "shader/parameter.html" with paraName="dirtMaskOpacity_B" paraType="Scalar" paraDesc="dirtB强度" %}
+	{% include "shader/parameter.html" with paraName="dirtSmoothness" paraType="Scalar" paraDesc="dirt Smoothness强度" %}
+	{% include "shader/parameter.html" with paraName="dirtTileA" paraType="Vector2" paraDesc="dirtA Tiling （脏迹贴图内置不可修改）" %}
+	{% include "shader/parameter.html" with paraName="dirtTileB" paraType="Vector2" paraDesc="dirtB Tiling （脏迹贴图内置不可修改）" %}
+	{% include "shader/parameter.html" with paraName="Triplanar_DirtBreakupMask" paraType="Scalar" paraDesc="dirt mask 强度" %}
+	{% include "shader/parameter.html" with paraName="TriPlanar_Tiling" paraType="Scalar" paraDesc="dirt mask Tiling" %}
+	{% include "shader/parameter.html" with paraName="MacroNormal" paraType="Texture" paraDesc="Macro Normal" %}
+	{% include "shader/parameter.html" with paraName="MacroNormalMaskTiling" paraType="Scalar" paraDesc="MacroNormalMask Tiling (Mask贴图内置不可修改)" %}
+	{% include "shader/parameter.html" with paraName="MacroNormalOpacity" paraType="Scalar" paraDesc="MacroNormal强度" %}
+	{% include "shader/parameter.html" with paraName="MacroNormalTiling" paraType="Scalar" paraDesc="MacroNormal Tiling" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / detailMask / Metallic" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>_paintColor的UV摆放象限</div>
+	<img src="/static/shader/images/TintColor_01.png"></img>
+	 {% endblock %}
+</body>

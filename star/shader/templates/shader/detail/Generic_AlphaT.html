@@ -1,0 +1,37 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 
+	<div>双面透明材质，0/1的Opacity，可以局部变色</div>
+	<div>需要双面明暗一致的请使用<a href="{% url 'shader:detail' "Generic_1xTintMask_AlphaTest" %}" target="_blank">Generic_1xTintMask_AlphaTest</a></div>
+	<div>除了SMD的通道用途不同以外基本一致</div>
+	{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_AlphaT.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_AlphaT.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@da443763-ea19-4f01-bd9f-f8ed7a84f5be">frosted://Roboto;@da443763-ea19-4f01-bd9f-f8ed7a84f5be</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Opacity"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="AO" bDesc="TintMask" aDesc="Metallic"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="colorTint" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="UseUVTintMask" paraType="Boolean" paraDesc="是否使用detailMask控制BaseColor的变色区域" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metalli的强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Smoothness_Variation" paraType="Scalar" paraDesc="Smoothness强度微调" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Opacity" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / AO / TintMask / Metallic" %}
+	{% endblock %}
+</body>

@@ -1,0 +1,56 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 根据距离进行UV缩放，类似于给贴图写了一个LOD，0/1的Opacity {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_Fence_AlphaBlendD_UVScale.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_Fence_AlphaBlendD_UVScale.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@4639bcad-bb42-4732-8fbe-7ecf3d6a4f79">frosted://Roboto;@4639bcad-bb42-4732-8fbe-7ecf3d6a4f79</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1A" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Opacity"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="NormalmapDXT" texGamma="TagDefault" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" bDesc="TintMask" aDesc="Metallic"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="WireScaleMask" texCoord="texCoord0" texFormat="DXT5a" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB.html" with rgbDesc="Tiling Mask， 控制UV Tiling的区域"%} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="AO_Reflect_Intensity" paraType="Color" paraDesc="Reflectance强度" %}
+	{% include "shader/parameter.html" with paraName="AO_Reflect_Map_Off" paraType="Boolean" paraDesc="关闭Reflectance贴图，勾选的话Reflectance为AO_Reflect_Intensity的值" %}
+	{% include "shader/parameter.html" with paraName="colorTint" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Opacity" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic贴图，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="Normal_Booster" paraType="Scalar" paraDesc="法线强度" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / TintMask / Metallic" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness强度" %}	
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="UseUVTintMask" paraType="Boolean" paraDesc="是否使用detailMask控制BaseColor的变色区域" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint0" paraType="Color" paraDesc="调节UV轴向0-1之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint1" paraType="Color" paraDesc="调节UV轴向1-2之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint2" paraType="Color" paraDesc="调节UV轴向2-3之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVcolorTint3" paraType="Color" paraDesc="调节UV轴向3-4之间的颜色" %}
+	{% include "shader/parameter.html" with paraName="UVScaleAngleMultiplier" paraType="Scalar" paraDesc="强度" %}
+	{% include "shader/parameter.html" with paraName="UVScaleAngleStartDis" paraType="Scalar" paraDesc="开始看到效果的距离，小于这个距离没有效果" %}
+	{% include "shader/parameter.html" with paraName="UVScaleAngleStep" paraType="Scalar" paraDesc="分层级数，值越小过渡越平滑" %}
+	{% include "shader/parameter.html" with paraName="UVScaleFixScaleRate" paraType="Scalar" paraDesc="缩放比例" %}
+	{% include "shader/parameter.html" with paraName="UVScaleFixStartDis" paraType="Scalar" paraDesc="开始看到效果的距离，小于这个距离没有效果" %}
+	{% include "shader/parameter.html" with paraName="UVScaleStep" paraType="Scalar" paraDesc="分层级数，值越小过渡越平滑" %}
+	{% include "shader/parameter.html" with paraName="UvTintAxisY" paraType="Boolean" paraDesc="控制沿X轴还是Y轴Tint" %}
+	{% include "shader/parameter.html" with paraName="WireScaleMask" paraType="Texture" paraDesc="Tiling Mask" %}	
+	{% endblock %}
+
+	{% block example %}
+	<div>该变色不受UV Tiling的影响</div>
+	<img src="/static/shader/images/UT_UVtint_4x.png"></img>
+	{% endblock %}
+</body>

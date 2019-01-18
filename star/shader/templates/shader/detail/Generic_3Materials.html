@@ -1,0 +1,44 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 三层叠加，不含Normal，材质2在x轴[1,2]之间，材质3在x轴[2,3]之间，其余都是材质1 {% endblock %}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_3Materials.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_3Materials.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@4d996b73-00fe-426b-966f-5881eff934cd">frosted://Roboto;@4d996b73-00fe-426b-966f-5881eff934cd</a> {% endblock %}
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="GenericMaterialPattern" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="材质样式" gDesc="材质样式" bDesc="材质样式" aDesc="材质样式" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="GenericMaterialPattern" paraType="Texture" paraDesc="材质样式贴图" %}
+
+	{% include "shader/parameter.html" with paraName="Material1_Color" paraType="Color" paraDesc="材质1 BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Material1_MetailMask" paraType="Scalar" paraDesc="材质1 Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="Material1_Pattern" paraType="Vectos3" paraDesc="选择材质1的样式" %}
+	{% include "shader/parameter.html" with paraName="Material1_Smoothness" paraType="Scalar" paraDesc="材质1 Smoothness强度" %}
+
+	{% include "shader/parameter.html" with paraName="Material2_Color" paraType="Color" paraDesc="材质2 BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Material2_MetailMask" paraType="Scalar" paraDesc="材质2 Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="Material2_Pattern" paraType="Vectos3" paraDesc="选择材质2的样式" %}
+	{% include "shader/parameter.html" with paraName="Material2_Smoothness" paraType="Scalar" paraDesc="材质2 Smoothness强度" %}
+
+	{% include "shader/parameter.html" with paraName="Material3_Color" paraType="Color" paraDesc="材质3 BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Material3_MetailMask" paraType="Scalar" paraDesc="材质3 Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="Material3_Pattern" paraType="Vectos3" paraDesc="选择材质3的样式" %}
+	{% include "shader/parameter.html" with paraName="Material3_Smoothness" paraType="Scalar" paraDesc="材质3 Smoothness强度" %}
+
+	{% include "shader/parameter.html" with paraName="TilingFactor" paraType="Vector2" paraDesc="UV Tiling（只影响BaseColor）" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>三种材质的UV摆放范围</div>
+	<img src="/static/shader/images/UT_3XMaterialSelectUV.png"></img>
+	{% endblock %}
+</body>
+
+

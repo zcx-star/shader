@@ -1,0 +1,33 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 两张海报上下切换，Emissive强度随距离而变化 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_MovieKiosk_2Poster_Emissive.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_MovieKiosk_2Poster_Emissive.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@00969b28-b178-4579-b551-0d6a802b4e6c">frosted://Roboto;@00969b28-b178-4579-b551-0d6a802b4e6c</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse_Poster01" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Diffuse_Poster02" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="baseDistance" paraType="Scalar" paraDesc="控制Emissive强度变化速度" %}
+	{% include "shader/parameter.html" with paraName="Diffuse_Poster01" paraType="Texture" paraDesc="海报1" %}
+	{% include "shader/parameter.html" with paraName="Diffuse_Poster02" paraType="Texture" paraDesc="海报2" %}
+	{% include "shader/parameter.html" with paraName="emissiveIntensityRange" paraType="Vector2" paraDesc="Emissive强度最小值 / 最大值" %}
+	{% include "shader/parameter.html" with paraName="EmissiveTint" paraType="Color" paraDesc="Emissive变色" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness" %}	
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_MovieKiosk_2Poster_Emissive.gif"></img>
+	{% endblock %}
+</body>

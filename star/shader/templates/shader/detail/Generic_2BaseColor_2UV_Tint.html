@@ -1,0 +1,42 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 一层基础材质+只有Diffuse的第二层材质，第一层材质可以局部变色，第二层材质无tiling {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_2BaseColor_2UV_Tint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_2BaseColor_2UV_Tint.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@6ddf20fc-43cc-11e4-a9df-d310d05d0017">frosted://Roboto;@6ddf20fc-43cc-11e4-a9df-d310d05d0017</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="backgroundBasecolor" texCoord="texCoord0" texFormat="DXT1" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="backgroundTintColor的TintMask"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="backgroundNormal" texCoord="texCoord0 " texFormat="DXT5" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="backgroundSMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="Smoothness" gDesc="Reflectance / AO" aDesc="Metallic"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="foregroundBasecolor" texCoord="texCoord1" texFormat="DXT1A" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="foreground和background两层BaseColor的TintMask / Smoothness的Mask"%} </tr>	
+
+	{% endblock %}
+
+	{% block parameters %}
+	{% include "shader/parameter.html" with paraName="AO_Reflect_Map_Off" paraType="Boolean" paraDesc="勾选的话Reflectance为AO_Reflect_Intensity，不勾选为backgroundSMD的G通道*AO_Reflect_Intensity" %}
+	{% include "shader/parameter.html" with paraName="backgroundTintColor01" paraType="Color" paraDesc="foregroundBasecolor变色" %}
+	{% include "shader/parameter.html" with paraName="backgroundTintColor02" paraType="Color" paraDesc="foregroundBasecolor变色" %}
+	{% include "shader/parameter.html" with paraName="foregroundTintColor" paraType="Color" paraDesc="foregroundBasecolor变色" %}
+	{% include "shader/parameter.html" with paraName="foregroundTransparency" paraType="Color" paraDesc="和foregroundBasecolor的alpha相乘，控制Tintmask和Smoothness的Mask" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_Intensity" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="MetalMask_OnOff" paraType="Boolean" paraDesc="是否使用Metallic，不使用的话Metallic为0" %}
+	{% include "shader/parameter.html" with paraName="Normal_Booster" paraType="Scalar" paraDesc="法线强度" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness，和backgroundSMD的R通道混合" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="foregroundBasecolor" paraType="Texture" paraDesc="BaseColor / TintMask" %}
+	{% include "shader/parameter.html" with paraName="backgroundBasecolor" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="backgroundNormal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="backgroundSMD" paraType="Texture" paraDesc="Smoothness / Reflectance / AO / Metallic" %}
+	{% endblock %}
+</body>

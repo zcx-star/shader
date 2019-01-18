@@ -1,0 +1,23 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 基础透明材质 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Decals\DCL_D_Opacity.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Decals/DCL_D_Opacity.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@9e99f0f9-1e8e-4015-9d26-c00df29fffbd">frosted://Roboto;@9e99f0f9-1e8e-4015-9d26-c00df29fffbd</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="Basecolor" aDesc="Opacity"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Alpha_Override" paraType="Scalar" paraDesc="Opacity强度" %}
+	{% include "shader/parameter.html" with paraName="ColorTweak" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Opacity" %}
+	{% endblock %}
+</body>

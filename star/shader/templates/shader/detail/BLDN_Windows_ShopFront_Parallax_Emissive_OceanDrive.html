@@ -1,0 +1,49 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 室内+百叶窗+Fog，百叶窗Mask由内置Blinds Mask控制，parrllax效果更好{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\Generic\BLDN_Windows_ShopFront_Parallax_Emissive_OceanDrive.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/Generic/BLDN_Windows_ShopFront_Parallax_Emissive_OceanDrive.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@489d112a-fc2d-452e-b948-03934558233b">frosted://Roboto;@489d112a-fc2d-452e-b948-03934558233b</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Atlas" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Base_LayerInterior和Blinds的Mask"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Texture" texCoord="texCoord1" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB_A.html" with rgbDesc="Blinds BaseColor" aDesc="Mask"%} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="MetallicFilm" paraType="Scalar" paraDesc="Metallic" %}
+	{% include "shader/parameter.html" with paraName="Blinds_Tiling" paraType="Scalar" paraDesc="Blinds UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Color" paraType="Color" paraDesc="Blinds变色" %}
+	{% include "shader/parameter.html" with paraName="Count" paraType="Scalar" paraDesc="Blinds Mask UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Coverage" paraType="Scalar" paraDesc="Blinds Mask y方向偏移值" %}
+	{% include "shader/parameter.html" with paraName="Random" paraType="Scalar" paraDesc="Blinds Mask X方向偏移值" %}
+	{% include "shader/parameter.html" with paraName="Texture" paraType="Texture" paraDesc="Blinds BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Translucency" paraType="Color" paraDesc="和Atlas混合，由Blinds Mask控制" %}
+	{% include "shader/parameter.html" with paraName="Base_Smoothness" paraType="Scalar" paraDesc="Base Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Dirt_Level" paraType="Scalar" paraDesc="Dirt强度" %}
+	{% include "shader/parameter.html" with paraName="Dirt_Smoothness" paraType="Scalar" paraDesc="Dirt Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Dirt_Tiling" paraType="Vector2" paraDesc="Dirt UV Tiling，脏迹贴图内置" %}
+	{% include "shader/parameter.html" with paraName="Opacity" paraType="Scalar" paraDesc="Dirt透明度" %}
+	{% include "shader/parameter.html" with paraName="Atlas" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="Depth" paraType="Scalar" paraDesc="整体深度" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Color" paraType="Color" paraDesc="Emissive" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Intensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="FogDepth" paraType="Scalar" paraDesc="Fog 深度" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>最终Smoothness由Base_Smoothness和Glass_DirtSmoothness叠加得到，由内置脏迹贴图控制，可以改变Dirt_Tiling和Glass_DirtLevel来调节</div>	
+	<br></br>
+
+	<div>parallax方式：</div>
+	<img src="/static/shader/images/parallax.gif"></img>
+	{% endblock %}
+
+</body>

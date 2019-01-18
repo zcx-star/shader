@@ -1,11 +1,13 @@
 <head>
 	{%extends "shader/base.html"%}
 	{% block title %} {{shader.shader_name}} {% endblock %}</title>
-    {% block extrastyle %}<link rel="stylesheet" type="text/css" href="/static/shader/detail.css"/>{% endblock %}
+    {% block extrastyle %} <link rel="stylesheet" type="text/css" href="/static/shader/detail.css"/> {% endblock %}    
 </head>
 
 <body>
-	{% block sidebar %}	
+	{% block content %}
+
+	<div id="sidebar">
         {% if shader_list %}
         <ul>
             {% for shader in shader_list %}
@@ -15,16 +17,19 @@
         {% else %}
             <p>No shader are available.</p>
         {% endif %}
-    {% endblock %}
+	</div>
 
+	<div id="main">
+		<div class="shaderTitle"> {{shader.shader_name}} </div> 
 
-	{% block main %}
-
-		{% block shaderTitle %}	<div class="shaderTitle">{{shader.shader_name}}</div> {%endblock%}
-
+		<div class="panel">
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Info</h2> </div>
+			<div class="info">{% block info %} {%endblock%}</div>
+		</div>
+		<hr>
 	
 		<div class="panel">
-			<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Links</h2></div>
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Links</h2> </div>
 
 			<table id="links">
 				<tr>
@@ -43,42 +48,35 @@
 		</div>
 		<hr>
 
-
 		<div class="panel">
-			<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Textures</h2></div>		
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Textures</h2> </div>		
 
 			<table id="textures">
 				<tr>
 					<th class="tableHeader">Name</th>
 					<th class="tableHeader" colspan="3">Description</th>
 				</tr>
-
 				{% block textures %} {% endblock %}
-
 			</table>
 		</div>
 		<hr>
 
-
 		<div class="panel">
-			<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Parameters</h2></div>
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Parameters</h2> </div>
 
-			<table id="parameter">
+			<table id="parameter" class = "sortable">			
 				<tr>
 					<th class="tableHeader">Name</th>
 					<th class="tableHeader">Type</th>
 					<th class="tableHeader">Description</th>
 				</tr>
-
-				{% block parameters %} {% endblock %}
-				
+				{% block parameters %} {% endblock %}				
 			</table>
 		</div>
 		<hr>
 
-
 		<div class="panel">
-			<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Usage</h2></div>
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Usage</h2> </div>
 
 			<table id="usage">
 				<tr>
@@ -90,6 +88,7 @@
 					<td class="itemTitle"><h4>VertexColor</h4></td>
 					<td class="itemContent">{{ shader.shader_vertexColor }}</td>
 				</tr>
+
 				<tr>				
 					<td class="itemTitle"><h4>UVSet</h4></td>
 					<td class="itemContent">{{ shader.shader_uvSet }}</td>
@@ -160,12 +159,11 @@
 		</div>
 		<hr>
 
-
 		<div class="panel">
-			<div class="panelTitle"><div class="placeHolder"><h2>i</h2></div><h2>Example</h2></div>
-
+			<div class="panelTitle"> <div class="placeHolder"><h2>i</h2></div> <h2>Example</h2> </div>
 			{% block example %} {% endblock %}
-
 		</div>
+	</div>
+	
 	{% endblock %} 
 </body>

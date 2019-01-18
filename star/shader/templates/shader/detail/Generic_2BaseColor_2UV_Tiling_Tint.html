@@ -1,0 +1,42 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 一层基础材质+只有Diffuse的第二层材质，两层材质分别Tiling {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_2BaseColor_2UV_Tiling_Tint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_2BaseColor_2UV_Tiling_Tint.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@57b9722c-d659-4cfa-a8e4-146081ce0804">frosted://Roboto;@57b9722c-d659-4cfa-a8e4-146081ce0804</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="backgroundBasecolor" texCoord="texCoord0" texFormat="DXT1" texGamma="TagDefault" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="backgroundNormal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="backgroundSMD" texCoord="texCoord0 / texCoord1" texFormat="DXT1" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="TintMask / Smoothness" %} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="DirtnessBasecolor" texCoord="texCoord0" texFormat="DXT1A" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="和BaseColor相乘，控制强度"%} </tr>	
+
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="backgroundBasecolor" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="backgroundNormal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="backgroundSMD" paraType="Texture" paraDesc="Smoothness / Metallic / TintMask / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="backgroundTilingCount" paraType="Vector2" paraDesc="background的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="bg_Brightness" paraType="Color" paraDesc="backgroundBasecolor明度" %}
+	{% include "shader/parameter.html" with paraName="bg_Contrast" paraType="Color" paraDesc="backgroundBasecolor对比度" %}
+	{% include "shader/parameter.html" with paraName="bg_Destrurate" paraType="Color" paraDesc="backgroundBasecolor饱和度" %}
+	{% include "shader/parameter.html" with paraName="bgColorTint" paraType="Color" paraDesc="backgroundBasecolor变色" %}
+	{% include "shader/parameter.html" with paraName="DirtnessBasecolor" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="DirtnessTilingCount" paraType="Vector2" paraDesc="DirtnessBasecolor的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="DirtnessTintColor" paraType="Color" paraDesc="DirtnessBasecolor变色" %}
+	{% include "shader/parameter.html" with paraName="DirtSmoothness" paraType="Scalar" paraDesc="和TintMask相乘，Smoothness的一部分" %}
+	{% include "shader/parameter.html" with paraName="DirtTransparency" paraType="Color" paraDesc="TintMask强度，R通道和backgroundSMD的B通道相乘" %}
+	{% include "shader/parameter.html" with paraName="metalnessScalar" paraType="Scalar" paraDesc="Metallic强度" %}
+	{% include "shader/parameter.html" with paraName="smoothScalar" paraType="Scalar" paraDesc="和backgroundSMD的R通道相乘，Smoothness的另一部分" %}
+	{% endblock %}
+</body>

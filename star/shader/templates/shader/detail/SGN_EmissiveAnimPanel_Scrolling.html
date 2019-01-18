@@ -1,0 +1,34 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 滚动霓虹灯 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_EmissiveAnimPanel_Scrolling.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_EmissiveAnimPanel_Scrolling.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@13152c8e-6e46-11e4-82ae-ad82b57a814d">frosted://Roboto;@13152c8e-6e46-11e4-82ae-ad82b57a814d</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="PanelTexture" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	{% endblock %}
+
+	{% block parameters %} 
+
+	{% include "shader/parameter.html" with paraName="animationRow" paraType="Scalar" paraDesc="x方向偏移值" %}
+	{% include "shader/parameter.html" with paraName="animSpeed" paraType="Scalar" paraDesc="动画速度" %}
+	{% include "shader/parameter.html" with paraName="columns" paraType="Scalar" paraDesc="动画图案大小" %}
+	{% include "shader/parameter.html" with paraName="emissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="gridOverlayTile" paraType="Scalar" paraDesc="网格UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="ledPanelBaseColor" paraType="Color" paraDesc="LED面板BaseColor" %}
+	{% include "shader/parameter.html" with paraName="panelColor" paraType="Color" paraDesc="图案BaseColor" %}
+	{% include "shader/parameter.html" with paraName="PanelTexture" paraType="Texture" paraDesc="图案样式" %}
+	{% include "shader/parameter.html" with paraName="rows" paraType="Scalar" paraDesc="图案UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="smoothness" paraType="Scalar" paraDesc="Smoothness强度" %}
+	{% include "shader/parameter.html" with paraName="textureChannelSwitch" paraType="Vector3" paraDesc="图案样式选择" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_EmissiveAnimPanel_Scrolling.gif"></img>
+	{% endblock %}
+</body>

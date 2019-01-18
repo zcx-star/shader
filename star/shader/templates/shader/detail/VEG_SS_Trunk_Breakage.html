@@ -1,0 +1,38 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}在<a href="{% url 'shader:detail' "VEG_SS_Trunk" %}" target="_blank">VEG_SS_Trunk</a>的基础上增加脏迹和TrunkBreak  {%endblock%}	
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Vegetation\VEG_SS_Trunk_Breakage.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Vegetation/VEG_SS_Trunk_Breakage.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@48f7b919-01a4-4983-bf81-ccaa8cce68a0">frosted://Roboto;@48f7b919-01a4-4983-bf81-ccaa8cce68a0</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal / detailNormal" bDesc="Smoothness" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="DirtMap" texCoord="texCoord0" texFormat="DXT1" texGamma="TagSrgb" %} </tr>	
+	<tr class = "tr_01"> {% include "shader/tex/RGB.html" with rgbDesc="dirtMask" %} </tr>
+	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="brk_BreakSurfaceColor" paraType="Color" paraDesc="内置Diffuse变色" %}
+	{% include "shader/parameter.html" with paraName="brk_breakUvMultiplier" paraType="Vector2" paraDesc="内置贴图UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="ColorTint" paraType="Color" paraDesc="Diffuse贴图变色" %}
+	{% include "shader/parameter.html" with paraName="detailMultiplier" paraType="Scalar" paraDesc="detail Normal强度" %}
+	{% include "shader/parameter.html" with paraName="detailUvMultiplier" paraType="Vector2" paraDesc="detail normal的UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="DirtColor_Tweak" paraType="Color" paraDesc="dirt变色" %}
+	{% include "shader/parameter.html" with paraName="DirtCoverage" paraType="Color" paraDesc="调节dirtMask" %}
+	{% include "shader/parameter.html" with paraName="DirtMap" paraType="Texture" paraDesc="dirtMask" %}
+	{% include "shader/parameter.html" with paraName="dirtMapSelect" paraType="Vector3" paraDesc="选择要使用的DirtMap通道" %}
+	{% include "shader/parameter.html" with paraName="dirtMapTile" paraType="Vector2" paraDesc="dirtMask UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / DetailNormal / Smoothness" %}
+	{% include "shader/parameter.html" with paraName="uvMultiplier" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% endblock %}
+</body>

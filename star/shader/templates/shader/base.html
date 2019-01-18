@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{% block title %}Roboto Shader{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="/static/shader/base.css"/>	
+	<link rel="stylesheet" type="text/css" href="/static/shader/base.css"/>
+	<script src="/static/shader/sorttable.js"></script>	
 	{% block extrastyle %}{% endblock %}
 </head>
 
@@ -15,8 +16,7 @@
 	</div>
 
 	<div id="content"> {% block content %}
-		<div id="sidebar">{% block sidebar %}{% endblock %}</div>
-		<div id="main">{% block main %}{% endblock %}</div>
+
 	{% endblock %} </div>
 
 	<div id="footer"> {% block footer%}{% endblock %} </div>

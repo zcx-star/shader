@@ -1,0 +1,47 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Roads\RD_DCL_RoadLines_CatEye.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Roads/RD_DCL_RoadLines_CatEye.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@bfab36f5-564b-4b2d-91ae-709360ca0669">frosted://Roboto;@bfab36f5-564b-4b2d-91ae-709360ca0669</a> {% endblock %}
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="BC7" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor / Emissive" alphaDesc="Opacity" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Height" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Normal2" texCoord="texCoord0" texFormat="BC7" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with bDesc="Parallax的Height" %} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Opacity" bDesc="Reflectance" %} </tr>	
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="detailMask" texCoord="texCoord1" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with gDesc="detailMask"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="alphaSelector" paraType="Vector2" paraDesc="选择Opacity使用的贴图 1/0:使用SMD的G通道 0/1:使用Diffuse的Alpha" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive, Opacity" %}
+
+	{% include "shader/UT/RD_DirtMask.html"%}
+
+	{% include "shader/parameter.html" with paraName="lineColor" paraType="Color" paraDesc="和Diffuse相乘，控制BaseColor/Emissive" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / Height" %}
+	{% include "shader/parameter.html" with paraName="Normal2" paraType="Texture" paraDesc="Parallax的Height" %}
+	{% include "shader/parameter.html" with paraName="Opacity" paraType="Scalar" paraDesc="控制Opacity" %}
+	{% include "shader/parameter.html" with paraName="OverallNormalIntensity" paraType="Scalar" paraDesc="控制Normal的强度" %}
+	{% include "shader/parameter.html" with paraName="Parallax" paraType="Scalar" paraDesc="控制Parallax" %}	
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Opacity / Reflectance" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="控制Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	
+	{% include "shader/UT/GenesisRetroReflect_RoadLines.html"%}
+	{% include "shader/UT/WetnessAndPuddles.html"%}
+
+	{% endblock %}
+</body>

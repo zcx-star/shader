@@ -1,0 +1,38 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Roads\RD_DCL_RoadLines_SolidThick.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Roads/RD_DCL_RoadLines_SolidThick.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@c81f3635-7422-4119-a810-9e931405c778">frosted://Roboto;@c81f3635-7422-4119-a810-9e931405c778</a> {% endblock %}
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B_A.html" with rDesc="BaseColor / Emissive" gDesc="Smoothness" bDesc="(Opacity)" aDesc="(Opacity)"%} </tr>
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RG_B.html" with rgDesc="Normal" bDesc="Height" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="detailMask" texCoord="texCoord1" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with gDesc="detailMask"%} </tr>
+
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="alphaSelector" paraType="Vector2" paraDesc="选择Opacity使用的贴图 1/0:使用Diffuse的B通道 0/1:使用Diffuse的Alpha" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive / Smoothness" %}
+
+	{% include "shader/UT/RD_DirtMask.html"%}
+
+	{% include "shader/parameter.html" with paraName="lineColor" paraType="Color" paraDesc="和Diffuse的R通道相乘，控制BaseColor/Emissive" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal / Height" %}
+	{% include "shader/parameter.html" with paraName="Opacity" paraType="Scalar" paraDesc="控制Opacity" %}	
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="控制Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	
+	{% include "shader/UT/GenesisRetroReflect_RoadLines.html"%}
+	{% include "shader/UT/WetnessAndPuddles.html"%}
+
+	{% endblock %}
+</body>

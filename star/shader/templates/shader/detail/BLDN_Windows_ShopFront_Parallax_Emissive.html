@@ -1,0 +1,56 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 室内+百叶窗+Fog，内置脏迹只影响Smoothness，可以单独控制百叶窗Emissive{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Buildings\Generic\BLDN_Windows_ShopFront_Parallax_Emissive.dbx{% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Buildings/Generic/BLDN_Windows_ShopFront_Parallax_Emissive.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@ad502758-0225-11e6-8bbe-aae8ecf3796f">frosted://Roboto;@ad502758-0225-11e6-8bbe-aae8ecf3796f</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Base_LayerInterior" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Emissive Mask"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Blinds" texCoord="texCoord0" texFormat="DXT5" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/RGB_A.html" with rgbDesc="百叶窗BaseColor" aDesc="Base_LayerInterior和Blinds的Mask"%} </tr>	
+	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="AtlasTile" paraType="Scalar" paraDesc="Parallax Height Tiling" %}
+	{% include "shader/parameter.html" with paraName="Base_Layer_Scale" paraType="Scalar" paraDesc="室内贴图缩放" %}
+	{% include "shader/parameter.html" with paraName="Base_LayerInterior" paraType="Texture" paraDesc="室内贴图" %}
+	{% include "shader/parameter.html" with paraName="Base_Smoothness" paraType="Scalar" paraDesc="基础Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Blinds" paraType="Texture" paraDesc="百叶窗贴图" %}
+	{% include "shader/parameter.html" with paraName="Blinds_Translucency" paraType="Color" paraDesc="百叶窗透明度" %}
+	{% include "shader/parameter.html" with paraName="BlindScale" paraType="Scalar" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="BlindsColor" paraType="Color" paraDesc="百叶窗BaseColor" %}
+	{% include "shader/parameter.html" with paraName="BlindsUVTile" paraType="Vector2" paraDesc="百叶窗 UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="BlindUVSpaceAdjuster" paraType="Vector2" paraDesc="参照下面Example详细说明" %}
+	{% include "shader/parameter.html" with paraName="Dirt_Tiling" paraType="Vector2" paraDesc="Dirt UV Tiling，脏迹贴图内置" %}
+	{% include "shader/parameter.html" with paraName="Emissive_Intensity" paraType="Scalar" paraDesc="Emissive Intensity" %}
+	{% include "shader/parameter.html" with paraName="Glass_DirtLevel" paraType="Scalar" paraDesc="Dirt强度" %}
+	{% include "shader/parameter.html" with paraName="Glass_DirtSmoothness" paraType="Scalar" paraDesc="Dirt Smoothness" %}
+	{% include "shader/parameter.html" with paraName="Glass_Transparency" paraType="Scalar" paraDesc="玻璃透明度" %}
+	{% include "shader/parameter.html" with paraName="InteriorEmissiveColor" paraType="Color" paraDesc="Emissive" %}
+	{% include "shader/parameter.html" with paraName="InteriorFogColor" paraType="Color" paraDesc="Fog BaseColor" %}
+	{% include "shader/parameter.html" with paraName="InteriorFogDensity" paraType="Scalar" paraDesc="Fog 强度" %}
+	{% include "shader/parameter.html" with paraName="InteriorFogHeight" paraType="Scalar" paraDesc="Fog 高度" %}
+	{% include "shader/parameter.html" with paraName="Window_MetalFilm" paraType="Scalar" paraDesc="Metallic" %}
+	{% endblock %}
+
+	{% block example %}
+	<div>最终Smoothness由Base_Smoothness和Glass_DirtSmoothness叠加得到，由内置脏迹贴图控制，可以改变Dirt_Tiling和Glass_DirtLevel来调节</div>
+	<br></br>
+
+	<div>parallax方式：</div>
+	<img src="/static/shader/images/parallax_1.gif"></img>
+	<br></br>
+
+	<div>Blinds Mask控制：</div>
+	<img src="/static/shader/images/blind.png"></img>
+	{% endblock %}
+
+</body>

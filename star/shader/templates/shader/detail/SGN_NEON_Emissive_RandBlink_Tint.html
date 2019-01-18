@@ -1,0 +1,34 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 和<a href="{% url 'shader:detail' "SGN_NEON_Emissive_Blink_Tint_Variation" %}" target="_blank">SGN_NEON_Emissive_Blink_Tint_Variation</a>的区别是闪烁周期不固定 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_NEON_Emissive_RandBlink_Tint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_NEON_Emissive_RandBlink_Tint.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@f7e7dfb8-5f92-420c-9e5a-18e148a789b1">frosted://Roboto;@f7e7dfb8-5f92-420c-9e5a-18e148a789b1</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_02"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="Emissive" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="baseDistance" paraType="Scalar" paraDesc="控制Emissive强度变化速度" %}
+	{% include "shader/parameter.html" with paraName="Blink" paraType="Boolean" paraDesc="是否闪烁" %}
+	{% include "shader/parameter.html" with paraName="BlinkSpeed" paraType="Scalar" paraDesc="闪烁速度" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Emissive" %}
+	{% include "shader/parameter.html" with paraName="emissiveIntensityRange" paraType="Vector2" paraDesc="Emissive强度最小值 / 最大值" %}
+	{% include "shader/parameter.html" with paraName="NeonColor01" paraType="Color" paraDesc="Diffuse变色,只影响Emissive" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Metallic / Emissive" %}	
+	{% include "shader/parameter.html" with paraName="TimeBalance" paraType="Scalar" paraDesc="发光 / 黑暗偏移值" %}
+	{% include "shader/parameter.html" with paraName="TimeOffset" paraType="Scalar" paraDesc="时间偏移值" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_NEON_Emissive_RandBlink_Tint.gif"></img>
+	{% endblock %}
+</body>

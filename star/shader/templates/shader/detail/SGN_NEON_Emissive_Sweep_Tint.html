@@ -1,0 +1,34 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 原地抖动 {%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Signs\SGN_NEON_Emissive_Sweep_Tint.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Signs/SGN_NEON_Emissive_Sweep_Tint.dbx {% endblock %}
+	{% block url %} <a href="frosted://Roboto;@162720df-7088-11e4-9521-97a689e3f4da">frosted://Roboto;@162720df-7088-11e4-9521-97a689e3f4da</a> {% endblock %}	
+
+	{% block textures %}
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT5" texGamma="TagSrgb" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="BaseColor/ Emissive" %} </tr>		
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="baseDistance" paraType="Scalar" paraDesc="控制Emissive强度变化速度" %}
+	{% include "shader/parameter.html" with paraName="Blink" paraType="Boolean" paraDesc="是否闪烁" %}
+	{% include "shader/parameter.html" with paraName="BlinkSpeed" paraType="Scalar" paraDesc="闪烁速度" %}
+	{% include "shader/parameter.html" with paraName="emissiveIntensityRange" paraType="Vector2" paraDesc="Emissive强度最小值 / 最大值" %}
+	{% include "shader/parameter.html" with paraName="microMove" paraType="Scalar" paraDesc="移动长度" %}
+	{% include "shader/parameter.html" with paraName="NeonColor01" paraType="Color" paraDesc="BaseColor / Emissive变色" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Metallic / BaseColor / Emissive" %}
+	{% include "shader/parameter.html" with paraName="speed" paraType="Scalar" paraDesc="速度" %}	
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Scalar" paraDesc="UV Tiling" %}
+	{% include "shader/parameter.html" with paraName="TimeBalance" paraType="Scalar" paraDesc="发光 / 黑暗偏移值" %}
+	{% include "shader/parameter.html" with paraName="TimeOffset" paraType="Scalar" paraDesc="时间偏移值" %}
+	{% endblock %}
+
+	{% block example %}
+	<img src="/static/shader/images/SGN_NEON_Emissive_Sweep_Tint.gif"></img>
+	{% endblock %}
+</body>

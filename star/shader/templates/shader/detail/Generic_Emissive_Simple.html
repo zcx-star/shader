@@ -1,0 +1,24 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %}带TOD的自发光材质，不透明{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_Emissive_Simple.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_Emissive_Simple.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@d532a887-07b8-47cc-8f14-b91b632f7904">frosted://Roboto;@d532a887-07b8-47cc-8f14-b91b632f7904</a> {% endblock %}	
+
+	{% block textures %} 
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="Color" paraType="Color" paraDesc="BaseColor" %}
+	{% include "shader/parameter.html" with paraName="EmissiveIntensity" paraType="Scalar" paraDesc="Emissive强度" %}
+	{% include "shader/parameter.html" with paraName="Glow_Color" paraType="Color" paraDesc="Emissive" %}
+	{% include "shader/parameter.html" with paraName="Metalness" paraType="Color" paraDesc="Metallic" %}
+	{% include "shader/parameter.html" with paraName="Smoothness" paraType="Scalar" paraDesc="Smoothness" %}
+	{% include "shader/parameter.html" with paraName="TOD" paraType="Boolean" paraDesc="是否启用TOD" %}
+	{% include "shader/parameter.html" with paraName="TOD_Group" paraType="Vector4" paraDesc="TOD Group?" %}
+	{% endblock %}
+</body>

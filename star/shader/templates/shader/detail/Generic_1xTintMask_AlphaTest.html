@@ -1,0 +1,33 @@
+<head>
+	{%extends "shader/detail.html"%}
+</head>
+
+<body>
+	{% block info %} 
+	<div>双面透明材质，0/1的Opacity，可以局部变色</div>
+	<div>需要双面明暗不一致的请使用<a href="{% url 'shader:detail' "Generic_AlphaT" %}" target="_blank">Generic_AlphaT</a></div> 
+	<div>除了SMD的通道用途不同以外基本一致</div>
+	{%endblock%}
+
+	{% block local %} D:\Roboto\Data\Source\Shaders\World\Generic\Generic_1xTintMask_AlphaTest.dbx {% endblock %}
+	{% block p4 %} //roboto/world/Data/Source/Shaders/World/Generic/Generic_1xTintMask_AlphaTest.dbx {% endblock %}
+	{% block url %} <a href = "frosted://Roboto;@cd23a137-6b21-11e4-9830-a50d6afcb9e7">frosted://Roboto;@cd23a137-6b21-11e4-9830-a50d6afcb9e7</a> {% endblock %}	
+
+	{% block textures %} 
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="Diffuse" texCoord="texCoord0" texFormat="DXT1A" texGamma="TagDefault" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/RGB_A.html" with rgbDesc="BaseColor" aDesc="Opacity"%} </tr>	
+
+	<tr class = "tr_02"> {% include "shader/tex/RGBA.html" with texName="Normal" texCoord="texCoord0" texFormat="NormalmapDXT" texGamma="TagDefault" %} </tr>
+
+	<tr class = "tr_01"> {% include "shader/tex/RGBA.html" with texName="SMD" texCoord="texCoord0" texFormat="DXT1" texGamma="TagLinear" %} </tr>
+	<tr class = "tr_01"> {% include "shader/tex/R_G_B.html" with rDesc="Smoothness" gDesc="Metallic" bDesc="TintMask"%} </tr>	
+	{% endblock %}
+
+	{% block parameters %} 
+	{% include "shader/parameter.html" with paraName="colorTint" paraType="Color" paraDesc="BaseColor变色" %}
+	{% include "shader/parameter.html" with paraName="Diffuse" paraType="Texture" paraDesc="BaseColor / Opacity" %}
+	{% include "shader/parameter.html" with paraName="Normal" paraType="Texture" paraDesc="Normal" %}
+	{% include "shader/parameter.html" with paraName="SMD" paraType="Texture" paraDesc="Smoothness / Metallic / TintMask" %}
+	{% include "shader/parameter.html" with paraName="Tiling" paraType="Vector2" paraDesc="UV Tiling" %}
+	{% endblock %}
+</body>
